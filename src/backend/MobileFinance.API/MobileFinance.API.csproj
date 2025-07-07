@@ -14,4 +14,11 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\MobileFinance.Communication\MobileFinance.Communication.csproj" />
+    <ProjectReference Include="..\..\shared\MobileFinance.Exceptions\MobileFinance.Exceptions.csproj" />
+    <ProjectReference Include="..\MobileFinance.Application\MobileFinance.Application.csproj" />
+    <ProjectReference Include="..\MobileFinance.Infra\MobileFinance.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

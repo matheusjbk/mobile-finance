@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\MobileFinance.Communication\MobileFinance.Communication.csproj" />
+    <ProjectReference Include="..\..\shared\MobileFinance.Exceptions\MobileFinance.Exceptions.csproj" />
+    <ProjectReference Include="..\MobileFinance.Domain\MobileFinance.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
