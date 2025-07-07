@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MobileFinance.Domain.Repositories.User;
 using MobileFinance.Infra.DataAccess;
+using MobileFinance.Infra.DataAccess.Repositories;
 using MobileFinance.Infra.Extensions;
 using System.Reflection;
 
@@ -11,6 +13,8 @@ public static class DependencyInjectionExtension
 {
     public static void AddInfra(this IServiceCollection services, IConfiguration configuration)
     {
+        AddRepositories(services);
+
         if(configuration.IsTestEnvironment())
             return;
 
@@ -41,5 +45,11 @@ public static class DependencyInjectionExtension
                 .WithGlobalConnectionString(connectionString)
                 .ScanIn(Assembly.Load("MobileFinance.Infra")).For.All();
             });
+    }
+
+    private static void AddRepositories(IServiceCollection services)
+    {
+        services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+        services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
     }
 }
