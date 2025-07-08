@@ -1,3 +1,4 @@
+using MobileFinance.Application;
 using MobileFinance.Infra;
 using MobileFinance.Infra.Extensions;
 using MobileFinance.Infra.Migrations;
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfra(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
 
 var app = builder.Build();
 
