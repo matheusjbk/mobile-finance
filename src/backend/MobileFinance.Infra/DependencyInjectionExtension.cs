@@ -2,10 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MobileFinance.Domain.Repositories;
+using MobileFinance.Domain.Repositories.RefreshToken;
 using MobileFinance.Domain.Repositories.User;
+using MobileFinance.Domain.Security.Cryptography;
 using MobileFinance.Infra.DataAccess;
 using MobileFinance.Infra.DataAccess.Repositories;
 using MobileFinance.Infra.Extensions;
+using MobileFinance.Infra.Security.Cryptography;
 using System.Reflection;
 
 namespace MobileFinance.Infra;
@@ -14,6 +18,7 @@ public static class DependencyInjectionExtension
     public static void AddInfra(this IServiceCollection services, IConfiguration configuration)
     {
         AddRepositories(services);
+        AddPasswordEncrypter(services);
 
         if(configuration.IsTestEnvironment())
             return;
@@ -51,5 +56,9 @@ public static class DependencyInjectionExtension
     {
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+        services.AddScoped<ITokenRepository, TokenRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
+
+    private static void AddPasswordEncrypter(IServiceCollection services) => services.AddScoped<IPasswordEncrypter, BCryptNet>();
 }
