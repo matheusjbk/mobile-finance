@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>The e-mail address has already been registered.</value>
+  </data>
+  <data name="EMPTY_EMAIL" xml:space="preserve">
+    <value>The e-mail address cannot be empty.</value>
+  </data>
+  <data name="EMPTY_NAME" xml:space="preserve">
+    <value>The name cannot be empty.</value>
+  </data>
+  <data name="EMPTY_PASSWORD" xml:space="preserve">
+    <value>The password cannot be empty.</value>
+  </data>
+  <data name="INVALID_EMAIL" xml:space="preserve">
+    <value>The e-mail address is invalid.</value>
+  </data>
+  <data name="INVALID_NAME" xml:space="preserve">
+    <value>The name must be longer than 2 characters.</value>
+  </data>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>The password must be longer than 6 characters.</value>
+  </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error.</value>
   </data>
