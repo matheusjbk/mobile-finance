@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileFinance.Exceptions", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileFinance.Communication", "src\shared\MobileFinance.Communication\MobileFinance.Communication.csproj", "{2390228C-4356-4C22-BB47-5178BCD34F84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validators.Test", "tests\Validators.Test\Validators.Test.csproj", "{B796EB90-1505-4FD4-9ACB-9E8EE61E199D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTestUtilities", "tests\CommonTestUtilities\CommonTestUtilities.csproj", "{3824B661-E5C3-463F-A1D5-76C947EF4DAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,14 @@ Global
 		{2390228C-4356-4C22-BB47-5178BCD34F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2390228C-4356-4C22-BB47-5178BCD34F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2390228C-4356-4C22-BB47-5178BCD34F84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B796EB90-1505-4FD4-9ACB-9E8EE61E199D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B796EB90-1505-4FD4-9ACB-9E8EE61E199D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B796EB90-1505-4FD4-9ACB-9E8EE61E199D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B796EB90-1505-4FD4-9ACB-9E8EE61E199D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3824B661-E5C3-463F-A1D5-76C947EF4DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3824B661-E5C3-463F-A1D5-76C947EF4DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3824B661-E5C3-463F-A1D5-76C947EF4DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3824B661-E5C3-463F-A1D5-76C947EF4DAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +78,8 @@ Global
 		{74D2266D-BBBC-4B3E-BB13-4741308CC54C} = {13BFD7F1-F1FD-4C45-8438-CEFA66A60585}
 		{0E2D6228-5E0E-4532-BA23-91ED3991F71F} = {1B8F2BF8-6A47-4E0B-B3B2-4539CA5DBEE2}
 		{2390228C-4356-4C22-BB47-5178BCD34F84} = {1B8F2BF8-6A47-4E0B-B3B2-4539CA5DBEE2}
+		{B796EB90-1505-4FD4-9ACB-9E8EE61E199D} = {4B86E70D-EAB6-402F-8DA7-7F45E6DE39A7}
+		{3824B661-E5C3-463F-A1D5-76C947EF4DAB} = {4B86E70D-EAB6-402F-8DA7-7F45E6DE39A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CD62ECAC-B45E-485F-B68E-22A910D8E84E}
