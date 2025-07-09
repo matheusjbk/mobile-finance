@@ -1,0 +1,27 @@
+name: Tests
+
+on:
+  push:
+    branches: ["develop"]
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu_latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup-dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: restore-dependencies
+        run: dotnet restore --verbosity normal
+
+      - name: build
+        run: dotnet build --no-restore --verbosity normal
+
+      - name: test
+        run: dotnet test --no-build --verbosity normal
