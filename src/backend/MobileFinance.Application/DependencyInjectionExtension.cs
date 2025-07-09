@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 using MobileFinance.Application.Services.AutoMapper;
+using MobileFinance.Application.UseCases.User.Register;
 using Sqids;
 
 namespace MobileFinance.Application;
@@ -11,6 +13,7 @@ public static class DependencyInjectionExtension
     {
         AddIdEncoder(services, configuration);
         AddAutoMapper(services, configuration);
+        AddUseCases(services);
     }
 
     private static void AddIdEncoder(IServiceCollection services, IConfiguration configuration)
@@ -31,6 +34,11 @@ public static class DependencyInjectionExtension
             var sqids = provider.GetRequiredService<SqidsEncoder<long>>();
             mapperConfiguration.AddProfile(new MappingProfile(sqids));
             mapperConfiguration.LicenseKey = configuration.GetValue<string>("Settings:AutoMapperLicenseKey")!;
-        }, null).CreateMapper());
+        }, new NullLoggerFactory()).CreateMapper());
+    }
+
+    private static void AddUseCases(IServiceCollection services)
+    {
+        services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
     }
 }
