@@ -45,7 +45,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
     public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
     {
-        Validate(request);
+        await Validate(request);
 
         var user = _mapper.Map<Domain.Entities.User>(request);
         user.Password = _passwordEncrypter.Encrypt(request.Password);
@@ -67,7 +67,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         };
     }
 
-    private async void Validate(RequestRegisterUserJson request)
+    private async Task Validate(RequestRegisterUserJson request)
     {
         var validationResult = new RegisterUserValidator().Validate(request);
 
