@@ -61,6 +61,69 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The e-mail address has already been registered..
+        /// </summary>
+        public static string EMAIL_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The e-mail address cannot be empty..
+        /// </summary>
+        public static string EMPTY_EMAIL {
+            get {
+                return ResourceManager.GetString("EMPTY_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name cannot be empty..
+        /// </summary>
+        public static string EMPTY_NAME {
+            get {
+                return ResourceManager.GetString("EMPTY_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password cannot be empty..
+        /// </summary>
+        public static string EMPTY_PASSWORD {
+            get {
+                return ResourceManager.GetString("EMPTY_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The e-mail address is invalid..
+        /// </summary>
+        public static string INVALID_EMAIL {
+            get {
+                return ResourceManager.GetString("INVALID_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name must be longer than 2 characters..
+        /// </summary>
+        public static string INVALID_NAME {
+            get {
+                return ResourceManager.GetString("INVALID_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password must be longer than 6 characters..
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error..
         /// </summary>
         public static string UNKNOWN_ERROR {
