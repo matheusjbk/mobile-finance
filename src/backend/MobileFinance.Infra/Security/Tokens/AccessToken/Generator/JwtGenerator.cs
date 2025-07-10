@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace MobileFinance.Infra.Security.Tokens.AccessToken.Generator;
-internal class JwtGenerator : JwtHandler, IAccessTokenGenerator
+public class JwtGenerator : JwtHandler, IAccessTokenGenerator
 {
     private readonly uint _expirationTimeInMinutes;
     private readonly string _signingKey;
