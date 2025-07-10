@@ -28,7 +28,7 @@ public class RegisterUserValidatorTest
 
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldHaveSingleItem();
-        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesException.EMPTY_NAME));
+        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.EMPTY_NAME));
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class RegisterUserValidatorTest
 
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldHaveSingleItem();
-        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesException.INVALID_NAME));
+        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.INVALID_NAME));
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class RegisterUserValidatorTest
 
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldHaveSingleItem();
-        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesException.EMPTY_EMAIL));
+        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.EMPTY_EMAIL));
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class RegisterUserValidatorTest
 
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldHaveSingleItem();
-        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesException.INVALID_EMAIL));
+        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.INVALID_EMAIL));
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class RegisterUserValidatorTest
 
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldHaveSingleItem();
-        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesException.EMPTY_PASSWORD));
+        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.EMPTY_PASSWORD));
     }
 
     [Theory]
@@ -103,6 +103,6 @@ public class RegisterUserValidatorTest
 
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldHaveSingleItem();
-        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesException.INVALID_PASSWORD));
+        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.INVALID_PASSWORD));
     }
 }

@@ -42,7 +42,7 @@ public class RegisterUserUseCaseTest
         var exception = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
         exception.GetErrorMessages().ShouldHaveSingleItem()
-            .ShouldBe(ResourceMessagesException.EMAIL_ALREADY_REGISTERED);
+            .ShouldBe(ExceptionMessages.EMAIL_ALREADY_REGISTERED);
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class RegisterUserUseCaseTest
         var exception = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
         exception.GetErrorMessages().ShouldHaveSingleItem()
-            .ShouldBe(ResourceMessagesException.EMPTY_NAME);
+            .ShouldBe(ExceptionMessages.EMPTY_NAME);
     }
 
     private static RegisterUserUseCase CreateUseCase(MobileFinance.Domain.Entities.RefreshToken refreshToken, string? email = null)

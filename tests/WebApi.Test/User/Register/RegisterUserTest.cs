@@ -47,7 +47,7 @@ public class RegisterUserTest : MobileFinanceClassFixture
 
         var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
 
-        var expectedMessage = ResourceMessagesException.ResourceManager.GetString("EMPTY_NAME");
+        var expectedMessage = ExceptionMessages.ResourceManager.GetString("EMPTY_NAME");
 
         errors.ShouldHaveSingleItem().GetString().ShouldBe(expectedMessage);
     }
