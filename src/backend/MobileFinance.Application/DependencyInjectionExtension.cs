@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using MobileFinance.Application.Services.AutoMapper;
+using MobileFinance.Application.UseCases.Login.DoLogin;
 using MobileFinance.Application.UseCases.User.Register;
 using Sqids;
 
@@ -40,5 +41,6 @@ public static class DependencyInjectionExtension
     private static void AddUseCases(IServiceCollection services)
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
     }
 }
