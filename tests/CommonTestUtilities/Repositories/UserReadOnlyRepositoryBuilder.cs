@@ -1,4 +1,5 @@
-﻿using MobileFinance.Domain.Repositories.User;
+﻿using MobileFinance.Domain.Entities;
+using MobileFinance.Domain.Repositories.User;
 using Moq;
 
 namespace CommonTestUtilities.Repositories;
@@ -11,6 +12,14 @@ public class UserReadOnlyRepositoryBuilder
     public UserReadOnlyRepositoryBuilder ExistActiveUserWithEmail(string email)
     {
         _mock.Setup(repo => repo.ExistActiveUserWithEmail(email)).ReturnsAsync(true);
+
+        return this;
+    }
+
+    public UserReadOnlyRepositoryBuilder GetByEmail(User? user = null)
+    {
+        if(user is not null)
+            _mock.Setup(repo => repo.GetByEmail(user.Email)).ReturnsAsync(user);
 
         return this;
     }
