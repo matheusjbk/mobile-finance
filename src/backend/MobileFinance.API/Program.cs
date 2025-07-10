@@ -1,3 +1,4 @@
+using MobileFinance.API.Converters;
 using MobileFinance.API.Filters;
 using MobileFinance.Application;
 using MobileFinance.Infra;
@@ -8,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter)));
+builder.Services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter)))
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -43,4 +45,10 @@ void MigrateDatabase()
     var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
     DatabaseMigration.Migrate(connectionString, serviceScope.ServiceProvider);
+}
+
+// This class is required for the WebApplicationFactory to work correctly in tests.
+public partial class Program 
+{
+    protected Program() { }
 }
