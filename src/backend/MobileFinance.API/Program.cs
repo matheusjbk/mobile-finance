@@ -1,5 +1,6 @@
 using MobileFinance.API.Converters;
 using MobileFinance.API.Filters;
+using MobileFinance.API.Middlewares;
 using MobileFinance.Application;
 using MobileFinance.Infra;
 using MobileFinance.Infra.Extensions;
@@ -27,6 +28,8 @@ if(app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<CultureMiddleware>();
 
 app.UseHttpsRedirection();
 

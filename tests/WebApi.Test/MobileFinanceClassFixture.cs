@@ -7,5 +7,18 @@ public class MobileFinanceClassFixture : IClassFixture<MobileFinanceWebApplicati
 
     public MobileFinanceClassFixture(MobileFinanceWebApplicationFactory factory) => _client = factory.CreateClient();
 
-    protected async Task<HttpResponseMessage> DoPost(string route, object request) => await _client.PostAsJsonAsync(route, request);
+    protected async Task<HttpResponseMessage> DoPost(string route, object request, string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+
+        return await _client.PostAsJsonAsync(route, request);
+    }
+
+    private void ChangeRequestCulture(string culture)
+    {
+        if(_client.DefaultRequestHeaders.Contains("Accept-Language"))
+            _client.DefaultRequestHeaders.Remove("Accept-Language");
+
+        _client.DefaultRequestHeaders.Add("Accept-Language", culture);
+    }
 }

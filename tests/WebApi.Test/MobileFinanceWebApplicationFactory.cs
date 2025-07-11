@@ -7,6 +7,7 @@ using MobileFinance.Domain.Entities;
 using MobileFinance.Infra.DataAccess;
 
 namespace WebApi.Test;
+// Configures the web host to use an in-memory database and seed test data for integration tests.
 public class MobileFinanceWebApplicationFactory : WebApplicationFactory<Program>
 {
     private MobileFinance.Domain.Entities.User _user = default!;
