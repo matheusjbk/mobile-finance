@@ -1,8 +1,10 @@
 ﻿using CommonTestUtilities.Requests;
 using MobileFinance.Exceptions;
 using Shouldly;
+using System.Globalization;
 using System.Net;
 using System.Text.Json;
+using WebApi.Test.InlineData;
 
 namespace WebApi.Test.User.Register;
 public class RegisterUserTest : MobileFinanceClassFixture
@@ -31,13 +33,14 @@ public class RegisterUserTest : MobileFinanceClassFixture
             () => responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldNotBeNullOrEmpty());
     }
 
-    [Fact]
-    public async Task Error_Name_Empty()
+    [Theory]
+    [ClassData(typeof(CultureInlineDataTest))]
+    public async Task Error_Name_Empty(string culture)
     {
         var request = RequestRegisterUserJsonBuilder.Build();
         request.Name = string.Empty;
 
-        var response = await DoPost(ROUTE, request);
+        var response = await DoPost(ROUTE, request, culture);
 
         response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
@@ -47,7 +50,7 @@ public class RegisterUserTest : MobileFinanceClassFixture
 
         var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
 
-        var expectedMessage = ExceptionMessages.ResourceManager.GetString("EMPTY_NAME");
+        var expectedMessage = ExceptionMessages.ResourceManager.GetString("EMPTY_NAME", new CultureInfo(culture));
 
         errors.ShouldHaveSingleItem().GetString().ShouldBe(expectedMessage);
     }

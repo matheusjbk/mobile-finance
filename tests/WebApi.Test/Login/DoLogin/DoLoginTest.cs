@@ -2,8 +2,10 @@
 using MobileFinance.Communication.Requests;
 using MobileFinance.Exceptions;
 using Shouldly;
+using System.Globalization;
 using System.Net;
 using System.Text.Json;
+using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Login.DoLogin;
 public class DoLoginTest : MobileFinanceClassFixture
@@ -44,12 +46,13 @@ public class DoLoginTest : MobileFinanceClassFixture
             () => responseData.RootElement.GetProperty("tokens").GetProperty("refreshToken").GetString().ShouldNotBeNullOrEmpty());
     }
 
-    [Fact]
-    public async Task Error_Invalid_User()
+    [Theory]
+    [ClassData(typeof(CultureInlineDataTest))]
+    public async Task Error_Invalid_User(string culture)
     {
         var request = RequestLoginJsonBuilder.Build();
 
-        var response = await DoPost(ROUTE, request);
+        var response = await DoPost(ROUTE, request, culture);
 
         response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
 
@@ -59,7 +62,7 @@ public class DoLoginTest : MobileFinanceClassFixture
 
         var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
 
-        var expectedMessage = ExceptionMessages.ResourceManager.GetString("INVALID_EMAIL_OR_PASSWORD");
+        var expectedMessage = ExceptionMessages.ResourceManager.GetString("INVALID_EMAIL_OR_PASSWORD", new CultureInfo(culture));
 
         errors.ShouldHaveSingleItem().GetString().ShouldBe(expectedMessage);
     }
