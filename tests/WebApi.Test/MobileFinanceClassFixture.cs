@@ -25,6 +25,14 @@ public class MobileFinanceClassFixture : IClassFixture<MobileFinanceWebApplicati
         return await _client.GetAsync(route);
     }
 
+    protected async Task<HttpResponseMessage> DoPut(string route, object request, string token, string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizationRequest(token);
+
+        return await _client.PutAsJsonAsync(route, request);
+    }
+
     private void ChangeRequestCulture(string culture)
     {
         if(_client.DefaultRequestHeaders.Contains("Accept-Language"))
