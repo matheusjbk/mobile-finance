@@ -10,6 +10,7 @@ using MobileFinance.Exceptions.ExceptionsBase;
 
 namespace MobileFinance.API.Filters;
 
+// Authorization filter that validates the access token from the request and ensures the user exists, returning 401 Unauthorized if validation fails.
 public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
 {
     private readonly IAccessTokenValidator _accessTokenValidator;

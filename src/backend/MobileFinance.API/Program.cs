@@ -1,7 +1,9 @@
 using MobileFinance.API.Converters;
 using MobileFinance.API.Filters;
 using MobileFinance.API.Middlewares;
+using MobileFinance.API.Token;
 using MobileFinance.Application;
+using MobileFinance.Domain.Security.Tokens;
 using MobileFinance.Infra;
 using MobileFinance.Infra.Extensions;
 using MobileFinance.Infra.Migrations;
@@ -15,8 +17,11 @@ builder.Services.AddControllers(options => options.Filters.Add(typeof(ExceptionF
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddInfra(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
