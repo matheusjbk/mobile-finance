@@ -2,6 +2,7 @@
 using MobileFinance.API.Attributes;
 using MobileFinance.Application.UseCases.User.Profile;
 using MobileFinance.Application.UseCases.User.Register;
+using MobileFinance.Application.UseCases.User.Update;
 using MobileFinance.Communication.Requests;
 using MobileFinance.Communication.Responses;
 
@@ -28,5 +29,18 @@ public class UserController : MobileFinanceBaseController
         var response = await useCase.Execute();
 
         return Ok(response);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Update(
+        IUpdateUserUseCase useCase,
+        RequestUpdateUserJson request)
+    {
+        await useCase.Execute(request);
+
+        return NoContent();
     }
 }

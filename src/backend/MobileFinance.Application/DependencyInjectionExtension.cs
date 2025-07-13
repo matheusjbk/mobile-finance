@@ -6,6 +6,7 @@ using MobileFinance.Application.Services.AutoMapper;
 using MobileFinance.Application.UseCases.Login.DoLogin;
 using MobileFinance.Application.UseCases.User.Profile;
 using MobileFinance.Application.UseCases.User.Register;
+using MobileFinance.Application.UseCases.User.Update;
 using Sqids;
 
 namespace MobileFinance.Application;
@@ -44,5 +45,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+        services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
     }
 }
