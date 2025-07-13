@@ -7,12 +7,15 @@ using MobileFinance.Domain.Repositories.RefreshToken;
 using MobileFinance.Domain.Repositories.User;
 using MobileFinance.Domain.Security.Cryptography;
 using MobileFinance.Domain.Security.Tokens;
+using MobileFinance.Domain.Services;
 using MobileFinance.Infra.DataAccess;
 using MobileFinance.Infra.DataAccess.Repositories;
 using MobileFinance.Infra.Extensions;
 using MobileFinance.Infra.Security.Cryptography;
 using MobileFinance.Infra.Security.Tokens.AccessToken.Generator;
+using MobileFinance.Infra.Security.Tokens.AccessToken.Validator;
 using MobileFinance.Infra.Security.Tokens.RefreshToken;
+using MobileFinance.Infra.Services.LoggedUser;
 using System.Reflection;
 
 namespace MobileFinance.Infra;
@@ -23,6 +26,7 @@ public static class DependencyInjectionExtension
         AddRepositories(services);
         AddPasswordEncrypter(services);
         AddTokens(services, configuration);
+        AddLoggedUser(services);
 
         if(configuration.IsTestEnvironment())
             return;
@@ -72,6 +76,9 @@ public static class DependencyInjectionExtension
         var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey")!;
 
         services.AddScoped<IAccessTokenGenerator>(provider => new JwtGenerator(expirationTime, signingKey));
+        services.AddScoped<IAccessTokenValidator>(provider => new JwtValidator(signingKey));
         services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
     }
+
+    private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();
 }
