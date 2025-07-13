@@ -3,7 +3,7 @@ using MobileFinance.Domain.Entities;
 using MobileFinance.Domain.Repositories.User;
 
 namespace MobileFinance.Infra.DataAccess.Repositories;
-public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
+public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository, IUserUpdateOnlyRepository
 {
     private readonly MobileFinanceDbContext _dbContext;
 
@@ -16,7 +16,11 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
         await _dbContext.Users.AnyAsync(user => user.Active && user.UserIdentifier.Equals(userIdentifier));
 
     public async Task<User?> GetByEmail(string email) =>
-        await _dbContext.Users.FirstOrDefaultAsync(user => user.Active && user.Email.Equals(email));
+        await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Active && user.Email.Equals(email));
 
     public async Task Add(User user) => await _dbContext.Users.AddAsync(user);
+
+    public async Task<User?> GetById(long userId) => await _dbContext.Users.FirstOrDefaultAsync(user => user.Active && user.Id.Equals(userId));
+
+    public void Update(User user) => _dbContext.Users.Update(user);
 }
