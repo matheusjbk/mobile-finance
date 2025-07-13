@@ -18,10 +18,10 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: restore-dependencies
-        run: dotnet restore --verbosity normal
+        run: dotnet restore --verbosity minimal
 
       - name: build
-        run: dotnet build --no-restore --verbosity normal
+        run: dotnet build --no-restore --verbosity minimal
 
       - name: test
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --no-build --verbosity minimal
