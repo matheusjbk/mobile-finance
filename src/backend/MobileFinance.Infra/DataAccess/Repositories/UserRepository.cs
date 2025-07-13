@@ -20,7 +20,7 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
 
     public async Task Add(User user) => await _dbContext.Users.AddAsync(user);
 
-    public async Task<User?> GetById(long userId) => await _dbContext.Users.FirstOrDefaultAsync(user => user.Active && user.Id.Equals(userId));
+    public async Task<User> GetById(long userId) => await _dbContext.Users.FirstAsync(user => user.Active && user.Id.Equals(userId));
 
     public void Update(User user) => _dbContext.Users.Update(user);
 }
