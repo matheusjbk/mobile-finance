@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using MobileFinance.Application.Services.AutoMapper;
 using MobileFinance.Application.UseCases.Login.DoLogin;
+using MobileFinance.Application.UseCases.User.ChangePassword;
 using MobileFinance.Application.UseCases.User.Profile;
 using MobileFinance.Application.UseCases.User.Register;
 using MobileFinance.Application.UseCases.User.Update;
@@ -46,5 +47,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        services.AddScoped<IChangeUserPasswordUseCase, ChangeUserPasswordUseCase>();
     }
 }
