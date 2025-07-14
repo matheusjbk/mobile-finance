@@ -61,6 +61,15 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password entered is different from the current password..
+        /// </summary>
+        public static string DIFFERENT_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("DIFFERENT_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The e-mail address has already been registered..
         /// </summary>
         public static string EMAIL_ALREADY_REGISTERED {
