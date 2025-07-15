@@ -33,7 +33,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
             var existUserWithIdentifier = await _repository.ExistActiveUserWithIdentifier(userIdentifier);
 
             if(!existUserWithIdentifier)
-                throw new UnauthorizedException(ExceptionMessages.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE);
+                throw new UnauthorizedException(ExceptionMessages.USER_WITHOUT_PERMISSION);
         }
         catch(SecurityTokenExpiredException)
         {
@@ -48,7 +48,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
         }
         catch
         {
-            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ExceptionMessages.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE));
+            context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(ExceptionMessages.USER_WITHOUT_PERMISSION));
         }
     }
 

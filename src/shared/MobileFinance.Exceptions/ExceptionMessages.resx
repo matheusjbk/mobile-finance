@@ -150,7 +150,7 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error.</value>
   </data>
-  <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
+  <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
     <value>You can not access this resource.</value>
   </data>
 </root>

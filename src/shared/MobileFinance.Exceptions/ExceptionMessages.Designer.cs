@@ -162,9 +162,9 @@ namespace MobileFinance.Exceptions {
         /// <summary>
         ///   Looks up a localized string similar to You can not access this resource..
         /// </summary>
-        public static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
+        public static string USER_WITHOUT_PERMISSION {
             get {
-                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION", resourceCulture);
             }
         }
     }
