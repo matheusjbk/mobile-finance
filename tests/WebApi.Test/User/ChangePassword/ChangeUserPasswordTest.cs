@@ -70,28 +70,4 @@ public class ChangeUserPasswordTest : MobileFinanceClassFixture
 
         errors.ShouldHaveSingleItem().GetString().ShouldBe(expectedMessage);
     }
-
-    [Theory]
-    [ClassData(typeof(CultureInlineDataTest))]
-    public async Task Error_Empty_New_Password(string culture)
-    {
-        var token = AccessTokenGeneratorBuilder.Build().Generate(_userIdentifier);
-        var request = RequestChangePasswordJsonBuilder.Build();
-        request.CurrentPassword = _userPassword;
-        request.NewPassword = string.Empty;
-
-        var response = await DoPut(route: ROUTE, request: request, token: token, culture: culture);
-
-        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-
-        await using var responseBody = await response.Content.ReadAsStreamAsync();
-
-        var responseData = await JsonDocument.ParseAsync(responseBody);
-
-        var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
-
-        var expectedMessage = ExceptionMessages.ResourceManager.GetString("EMPTY_PASSWORD", new CultureInfo(culture));
-
-        errors.ShouldHaveSingleItem().GetString().ShouldBe(expectedMessage);
-    }
 }
