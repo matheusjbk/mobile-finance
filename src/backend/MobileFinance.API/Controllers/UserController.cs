@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MobileFinance.API.Attributes;
 using MobileFinance.Application.UseCases.User.ChangePassword;
+using MobileFinance.Application.UseCases.User.CreatePassword;
 using MobileFinance.Application.UseCases.User.Profile;
 using MobileFinance.Application.UseCases.User.Register;
 using MobileFinance.Application.UseCases.User.Update;
@@ -53,6 +54,20 @@ public class UserController : MobileFinanceBaseController
     public async Task<IActionResult> ChangePassword(
         IChangeUserPasswordUseCase useCase,
         RequestChangePasswordJson request)
+    {
+        await useCase.Execute(request);
+
+        return NoContent();
+    }
+
+    [HttpPost]
+    [Route("create-password")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> CreatePassword(
+        RequestCreateUserPasswordJson request,
+        ICreateUserPasswordUseCase useCase)
     {
         await useCase.Execute(request);
 
