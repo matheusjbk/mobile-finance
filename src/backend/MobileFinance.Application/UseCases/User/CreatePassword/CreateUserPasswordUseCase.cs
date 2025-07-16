@@ -2,7 +2,7 @@
 using MobileFinance.Domain.Repositories;
 using MobileFinance.Domain.Repositories.User;
 using MobileFinance.Domain.Security.Cryptography;
-using MobileFinance.Domain.Services;
+using MobileFinance.Domain.Services.LoggedUser;
 using MobileFinance.Exceptions.ExceptionsBase;
 
 namespace MobileFinance.Application.UseCases.User.CreatePassword;

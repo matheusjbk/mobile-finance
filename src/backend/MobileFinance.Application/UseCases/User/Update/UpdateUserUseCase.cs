@@ -2,7 +2,7 @@
 using MobileFinance.Communication.Requests;
 using MobileFinance.Domain.Repositories;
 using MobileFinance.Domain.Repositories.User;
-using MobileFinance.Domain.Services;
+using MobileFinance.Domain.Services.LoggedUser;
 using MobileFinance.Exceptions;
 using MobileFinance.Exceptions.ExceptionsBase;
 

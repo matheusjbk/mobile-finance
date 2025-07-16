@@ -1,5 +1,5 @@
 ﻿using MobileFinance.Domain.Entities;
-using MobileFinance.Domain.Services;
+using MobileFinance.Domain.Services.LoggedUser;
 using Moq;
 
 namespace CommonTestUtilities.LoggedUser;

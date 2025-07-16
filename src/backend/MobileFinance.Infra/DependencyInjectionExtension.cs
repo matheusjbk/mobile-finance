@@ -7,7 +7,7 @@ using MobileFinance.Domain.Repositories.RefreshToken;
 using MobileFinance.Domain.Repositories.User;
 using MobileFinance.Domain.Security.Cryptography;
 using MobileFinance.Domain.Security.Tokens;
-using MobileFinance.Domain.Services;
+using MobileFinance.Domain.Services.LoggedUser;
 using MobileFinance.Infra.DataAccess;
 using MobileFinance.Infra.DataAccess.Repositories;
 using MobileFinance.Infra.Extensions;

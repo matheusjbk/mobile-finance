@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MobileFinance.Communication.Responses;
-using MobileFinance.Domain.Services;
+using MobileFinance.Domain.Services.LoggedUser;
 
 namespace MobileFinance.Application.UseCases.User.Profile;
 public class GetUserProfileUseCase : IGetUserProfileUseCase

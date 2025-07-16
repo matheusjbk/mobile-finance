@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MobileFinance.Domain.Entities;
 using MobileFinance.Domain.Security.Tokens;
-using MobileFinance.Domain.Services;
+using MobileFinance.Domain.Services.LoggedUser;
 using MobileFinance.Infra.DataAccess;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
