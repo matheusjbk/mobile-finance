@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MobileFinance.API.BackgroundServices;
 using MobileFinance.API.Converters;
 using MobileFinance.API.Filters;
 using MobileFinance.API.Middlewares;
@@ -28,6 +29,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 if(!builder.Configuration.IsTestEnvironment())
 {
+    builder.Services.AddHostedService<DeleteUserService>();
     AddGoogleAuthentication();
 }
 

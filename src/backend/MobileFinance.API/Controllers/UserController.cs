@@ -2,6 +2,7 @@
 using MobileFinance.API.Attributes;
 using MobileFinance.Application.UseCases.User.ChangePassword;
 using MobileFinance.Application.UseCases.User.CreatePassword;
+using MobileFinance.Application.UseCases.User.Delete.Request;
 using MobileFinance.Application.UseCases.User.Profile;
 using MobileFinance.Application.UseCases.User.Register;
 using MobileFinance.Application.UseCases.User.Update;
@@ -70,6 +71,16 @@ public class UserController : MobileFinanceBaseController
         ICreateUserPasswordUseCase useCase)
     {
         await useCase.Execute(request);
+
+        return NoContent();
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Delete(IRequestDeleteUserUseCase useCase)
+    {
+        await useCase.Execute();
 
         return NoContent();
     }
