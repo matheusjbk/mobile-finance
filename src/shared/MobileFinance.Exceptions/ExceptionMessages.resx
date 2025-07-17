@@ -132,6 +132,9 @@
   <data name="EMPTY_PASSWORD" xml:space="preserve">
     <value>The password cannot be empty.</value>
   </data>
+  <data name="EXPIRED_SESSION" xml:space="preserve">
+    <value>Your session has expired. Please log in again to continue.</value>
+  </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
     <value>The e-mail address is invalid.</value>
   </data>
@@ -144,6 +147,9 @@
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>The password must be longer than 6 characters.</value>
   </data>
+  <data name="INVALID_SESSION" xml:space="preserve">
+    <value>We couldn't find a valid session. Please log in to access this feature.</value>
+  </data>
   <data name="NO_TOKEN" xml:space="preserve">
     <value>Request do not have an access token.</value>
   </data>
@@ -151,6 +157,6 @@
     <value>Unknown error.</value>
   </data>
   <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
-    <value>You can not access this resource.</value>
+    <value>You cannot access this resource.</value>
   </data>
 </root>
