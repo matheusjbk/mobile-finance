@@ -8,6 +8,7 @@ using MobileFinance.Domain.Repositories.User;
 using MobileFinance.Domain.Security.Cryptography;
 using MobileFinance.Domain.Security.Tokens;
 using MobileFinance.Domain.Services.LoggedUser;
+using MobileFinance.Domain.Services.ServiceBus;
 using MobileFinance.Infra.DataAccess;
 using MobileFinance.Infra.DataAccess.Repositories;
 using MobileFinance.Infra.Extensions;
@@ -16,6 +17,7 @@ using MobileFinance.Infra.Security.Tokens.AccessToken.Generator;
 using MobileFinance.Infra.Security.Tokens.AccessToken.Validator;
 using MobileFinance.Infra.Security.Tokens.RefreshToken;
 using MobileFinance.Infra.Services.LoggedUser;
+using MobileFinance.Infra.Services.ServiceBus;
 using System.Reflection;
 
 namespace MobileFinance.Infra;
@@ -33,6 +35,7 @@ public static class DependencyInjectionExtension
 
         AddDbContext_MySql(services, configuration);
         AddFluentMigrator_MySql(services, configuration);
+        AddQueue(services, configuration);
     }
 
     private static void AddDbContext_MySql(IServiceCollection services, IConfiguration configuration)
@@ -65,6 +68,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUserReadOnlyRepository, UserRepository>();
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+        services.AddScoped<IUserDeleteOnlyRepository, UserRepository>();
         services.AddScoped<ITokenRepository, TokenRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
@@ -82,4 +86,12 @@ public static class DependencyInjectionExtension
     }
 
     private static void AddLoggedUser(IServiceCollection services) => services.AddScoped<ILoggedUser, LoggedUser>();
+
+    private static void AddQueue(IServiceCollection services, IConfiguration configuration)
+    {
+        var hostName = configuration.GetValue<string>("Settings:RabbitMQ:HostName")!;
+        var queueName = configuration.GetValue<string>("Settings:RabbitMQ:QueueName")!;
+
+        services.AddSingleton<IDeleteUserQueue>(provider => new DeleteUserQueue(hostName, queueName));
+    }
 }
