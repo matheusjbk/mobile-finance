@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using MobileFinance.Application.Services.AutoMapper;
 using MobileFinance.Application.UseCases.Login.DoLogin;
 using MobileFinance.Application.UseCases.Login.External;
+using MobileFinance.Application.UseCases.Token.RefreshToken;
 using MobileFinance.Application.UseCases.User.ChangePassword;
 using MobileFinance.Application.UseCases.User.CreatePassword;
 using MobileFinance.Application.UseCases.User.Delete.Delete;
@@ -56,5 +57,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<ICreateUserPasswordUseCase, CreateUserPasswordUseCase>();
         services.AddScoped<IRequestDeleteUserUseCase, RequestDeleteUserUseCase>();
         services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
+        services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
     }
 }
