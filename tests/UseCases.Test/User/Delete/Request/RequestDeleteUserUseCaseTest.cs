@@ -21,7 +21,7 @@ public class RequestDeleteUserUseCaseTest
         user.Active.ShouldBeFalse();
     }
 
-    private RequestDeleteUserUseCase CreateUseCase(MobileFinance.Domain.Entities.User user)
+    private static RequestDeleteUserUseCase CreateUseCase(MobileFinance.Domain.Entities.User user)
     {
         var loggedUser = LoggedUserBuilder.Build(user);
         var repository = new UserUpdateOnlyRepositoryBuilder().GetById(user).Build();

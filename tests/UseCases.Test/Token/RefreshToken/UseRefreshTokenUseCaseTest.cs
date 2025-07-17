@@ -68,7 +68,7 @@ public class UseRefreshTokenUseCaseTest
             .ShouldBe(ExceptionMessages.EXPIRED_SESSION);
     }
 
-    private UseRefreshTokenUseCase CreateUseCase(MobileFinance.Domain.Entities.RefreshToken? refreshToken = null)
+    private static UseRefreshTokenUseCase CreateUseCase(MobileFinance.Domain.Entities.RefreshToken? refreshToken = null)
     {
         var tokenRepositoryBuilder = new TokenRepositoryBuilder();
         var unitOfWork = UnitOfWorkBuilder.Build();

@@ -17,7 +17,7 @@ public class DeleteUserAccountUseCaseTest
         await act.ShouldNotThrowAsync();
     }
 
-    private DeleteUserAccountUseCase CreateUseCase()
+    private static DeleteUserAccountUseCase CreateUseCase()
     {
         var repository = UserDeleteOnlyRepositoryBuilder.Build();
         var unitOfWork = UnitOfWorkBuilder.Build();
