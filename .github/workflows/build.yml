@@ -41,12 +41,19 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
+      - name: Install converlet.console
+        shell: powershell
+        run: |
+          dotnet tool install -g coverlet.console
+
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"matheusjbk_mobile-finance" /o:"matheusjbk" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=tests\**\*.Test\*.xml
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"matheusjbk_mobile-finance" /o:"matheusjbk" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=tests\*.Test\coverage.xml
           dotnet build
-          dotnet test --collect "XPlat Code Coverage"
+          coverlet tests\UseCases.Test\bin\Debug\net8.0\UseCases.Test.dll --target "dotnet" --targetargs "test --no-build" -f=opencover -o="tests\UseCases.Test\coverage.xml"
+          coverlet tests\Validators.Test\bin\Debug\net8.0\Validators.Test.dll --target "dotnet" --targetargs "test --no-build" -f=opencover -o="tests\Validators.Test\coverage.xml"
+          coverlet tests\WebApi.Test\bin\Debug\net8.0\WebApi.Test.dll --target "dotnet" --targetargs "test --no-build" -f=opencover -o="tests\WebApi.Test\coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
