@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
+using Mapster;
 using MobileFinance.Application.Token;
 using MobileFinance.Communication.Requests;
 using MobileFinance.Communication.Responses;
@@ -16,7 +16,6 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 {
     private readonly IUserReadOnlyRepository _userReadOnlyRepository;
     private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
-    private readonly IMapper _mapper;
     private readonly IPasswordEncrypter _passwordEncrypter;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
@@ -26,7 +25,6 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     public RegisterUserUseCase(
         IUserReadOnlyRepository userReadOnlyRepository,
         IUserWriteOnlyRepository userWriteOnlyRepository,
-        IMapper mapper,
         IPasswordEncrypter passwordEncrypter,
         IUnitOfWork unitOfWork,
         IAccessTokenGenerator accessTokenGenerator,
@@ -35,7 +33,6 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     {
         _userReadOnlyRepository = userReadOnlyRepository;
         _userWriteOnlyRepository = userWriteOnlyRepository;
-        _mapper = mapper;
         _passwordEncrypter = passwordEncrypter;
         _unitOfWork = unitOfWork;
         _accessTokenGenerator = accessTokenGenerator;
@@ -47,7 +44,8 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     {
         await Validate(request);
 
-        var user = _mapper.Map<Domain.Entities.User>(request);
+        var user = request.Adapt<Domain.Entities.User>();
+
         user.Password = _passwordEncrypter.Encrypt(request.Password);
 
         await _userWriteOnlyRepository.Add(user);
