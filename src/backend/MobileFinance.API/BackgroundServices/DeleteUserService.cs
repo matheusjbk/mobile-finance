@@ -19,8 +19,8 @@ public class DeleteUserService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var factory = new ConnectionFactory { HostName = _configuration.GetValue<string>("Settings:RabbitMQ:HostName")! };
-        using var connection = await factory.CreateConnectionAsync();
-        using var channel = await connection.CreateChannelAsync();
+        using var connection = await factory.CreateConnectionAsync(cancellationToken: CancellationToken.None);
+        using var channel = await connection.CreateChannelAsync(cancellationToken: CancellationToken.None);
         var queueName = _configuration.GetValue<string>("Settings:RabbitMQ:QueueName")!;
 
         await channel.QueueDeclareAsync(
@@ -28,11 +28,12 @@ public class DeleteUserService : BackgroundService
             durable: false,
             exclusive: false,
             autoDelete: false,
-            arguments: null);
+            arguments: null,
+            cancellationToken: CancellationToken.None);
 
         var consumer = new AsyncEventingBasicConsumer(channel);
 
-        consumer.ReceivedAsync += async (sender, eventArgs) =>
+        consumer.ReceivedAsync += async (_, eventArgs) =>
         {
                 var body = eventArgs.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
@@ -50,7 +51,8 @@ public class DeleteUserService : BackgroundService
         await channel.BasicConsumeAsync(
             queue: queueName,
             autoAck: false,
-            consumer: consumer);
+            consumer: consumer,
+            cancellationToken: CancellationToken.None);
 
 
         var taskCompletionSource = new TaskCompletionSource();
