@@ -1,6 +1,5 @@
 ﻿using CommonTestUtilities.Entities;
 using CommonTestUtilities.LoggedUser;
-using CommonTestUtilities.Mapper;
 using MobileFinance.Application.UseCases.User.Profile;
 using Shouldly;
 
@@ -23,8 +22,7 @@ public class GetUserProfileUseCaseTest
     private static GetUserProfileUseCase CreateUseCase(MobileFinance.Domain.Entities.User user)
     {
         var loggedUser = LoggedUserBuilder.Build(user);
-        var mapper = MapperBuilder.Build();
 
-        return new GetUserProfileUseCase(loggedUser, mapper);
+        return new GetUserProfileUseCase(loggedUser);
     }
 }

@@ -1,8 +1,7 @@
-﻿using AutoMapper;
+﻿using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging.Abstractions;
-using MobileFinance.Application.Services.AutoMapper;
+using MobileFinance.Application.Services.Mapster;
 using MobileFinance.Application.UseCases.Login.DoLogin;
 using MobileFinance.Application.UseCases.Login.External;
 using MobileFinance.Application.UseCases.Token.RefreshToken;
@@ -21,7 +20,7 @@ public static class DependencyInjectionExtension
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         AddIdEncoder(services, configuration);
-        AddAutoMapper(services, configuration);
+        AddMapster(services, configuration);
         AddUseCases(services);
     }
 
@@ -36,14 +35,17 @@ public static class DependencyInjectionExtension
         services.AddSingleton(sqids);
     }
 
-    private static void AddAutoMapper(IServiceCollection services, IConfiguration configuration)
+    private static void AddMapster(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped(provider => new MapperConfiguration(mapperConfiguration =>
+        var sqids = new SqidsEncoder<long>(new()
         {
-            var sqids = provider.GetRequiredService<SqidsEncoder<long>>();
-            mapperConfiguration.AddProfile(new MappingProfile(sqids));
-            mapperConfiguration.LicenseKey = configuration.GetValue<string>("Settings:AutoMapperLicenseKey")!;
-        }, new NullLoggerFactory()).CreateMapper());
+            MinLength = 3,
+            Alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!
+        });
+
+        var mapsterConfiguration = new MapsterConfiguration(sqids);
+
+        services.AddMapster();
     }
 
     private static void AddUseCases(IServiceCollection services)

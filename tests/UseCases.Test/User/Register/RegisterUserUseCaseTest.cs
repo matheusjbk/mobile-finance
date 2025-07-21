@@ -1,6 +1,5 @@
 ﻿using CommonTestUtilities.Cryptography;
 using CommonTestUtilities.Entities;
-using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using CommonTestUtilities.Tokens;
@@ -66,7 +65,6 @@ public class RegisterUserUseCaseTest
     {
         var userReadOnlyRepositoryBuilder = new UserReadOnlyRepositoryBuilder();
         var userWriteOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
-        var mapper = MapperBuilder.Build();
         var passwordEncrypter = PasswordEncrypterBuilder.Build();
         var unitOfWork = UnitOfWorkBuilder.Build();
         var accessTokenGenerator = AccessTokenGeneratorBuilder.Build();
@@ -79,7 +77,6 @@ public class RegisterUserUseCaseTest
         return new RegisterUserUseCase(
             userReadOnlyRepositoryBuilder.Build(),
             userWriteOnlyRepository,
-            mapper,
             passwordEncrypter,
             unitOfWork,
             accessTokenGenerator,
