@@ -61,6 +61,15 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specified day is out of range..
+        /// </summary>
+        public static string DAY_OUT_OF_RANGE {
+            get {
+                return ResourceManager.GetString("DAY_OUT_OF_RANGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password entered is different from the current password..
         /// </summary>
         public static string DIFFERENT_CURRENT_PASSWORD {
@@ -75,6 +84,15 @@ namespace MobileFinance.Exceptions {
         public static string EMAIL_ALREADY_REGISTERED {
             get {
                 return ResourceManager.GetString("EMAIL_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Income&apos;s amount cannot be empty..
+        /// </summary>
+        public static string EMPTY_AMOUNT {
+            get {
+                return ResourceManager.GetString("EMPTY_AMOUNT", resourceCulture);
             }
         }
         
@@ -111,6 +129,15 @@ namespace MobileFinance.Exceptions {
         public static string EXPIRED_SESSION {
             get {
                 return ResourceManager.GetString("EXPIRED_SESSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided income type is not supported..
+        /// </summary>
+        public static string INCOME_TYPE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("INCOME_TYPE_NOT_SUPPORTED", resourceCulture);
             }
         }
         
@@ -174,6 +201,15 @@ namespace MobileFinance.Exceptions {
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must select with true of false if the payment day is a business day or not..
+        /// </summary>
+        public static string USE_BUSINESS_DAY_NULL {
+            get {
+                return ResourceManager.GetString("USE_BUSINESS_DAY_NULL", resourceCulture);
             }
         }
         
