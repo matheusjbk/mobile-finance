@@ -4,5 +4,5 @@ using MobileFinance.Communication.Responses;
 namespace MobileFinance.Application.UseCases.Income.Register;
 public interface IRegisterIncomeUseCase
 {
-    public Task<ResponseIncomeJson> Execute(RequestIncomeJson request);
+    public Task<ResponseRegisteredIncomeJson> Execute(RequestIncomeJson request);
 }
