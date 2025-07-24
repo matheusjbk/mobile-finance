@@ -31,7 +31,7 @@ public class MapsterConfiguration
         TypeAdapterConfig<User, ResponseUserProfileJson>
             .NewConfig();
 
-        TypeAdapterConfig<Income, ResponseIncomeJson>
+        TypeAdapterConfig<Income, ResponseRegisteredIncomeJson>
             .NewConfig()
             .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
     }

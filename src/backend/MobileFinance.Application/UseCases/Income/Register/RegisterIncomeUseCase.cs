@@ -23,7 +23,7 @@ public class RegisterIncomeUseCase : IRegisterIncomeUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ResponseIncomeJson> Execute(RequestIncomeJson request)
+    public async Task<ResponseRegisteredIncomeJson> Execute(RequestIncomeJson request)
     {
         Validate(request);
 
@@ -35,7 +35,7 @@ public class RegisterIncomeUseCase : IRegisterIncomeUseCase
         await _repository.Add(income);
         await _unitOfWork.Commit();
 
-        return income.Adapt<ResponseIncomeJson>();
+        return income.Adapt<ResponseRegisteredIncomeJson>();
     }
 
     private static void Validate(RequestIncomeJson request)
