@@ -132,6 +132,9 @@
   <data name="EMPTY_EMAIL" xml:space="preserve">
     <value>The e-mail address cannot be empty.</value>
   </data>
+  <data name="EMPTY_INCOME_TITLE" xml:space="preserve">
+    <value>The income title has been left blank. Please provide a title.</value>
+  </data>
   <data name="EMPTY_NAME" xml:space="preserve">
     <value>The name cannot be empty.</value>
   </data>

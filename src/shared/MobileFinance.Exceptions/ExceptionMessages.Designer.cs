@@ -106,6 +106,15 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The income title has been left blank. Please provide a title..
+        /// </summary>
+        public static string EMPTY_INCOME_TITLE {
+            get {
+                return ResourceManager.GetString("EMPTY_INCOME_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name cannot be empty..
         /// </summary>
         public static string EMPTY_NAME {

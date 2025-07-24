@@ -7,6 +7,7 @@ public class Version3 : VersionBase
     public override void Up()
     {
         CreateTable("Incomes")
+            .WithColumn("Title").AsString().NotNullable()
             .WithColumn("Amount").AsInt64().NotNullable()
             .WithColumn("IncomeType").AsInt32().NotNullable()
             .WithColumn("DayOfMonth").AsByte().Nullable()
