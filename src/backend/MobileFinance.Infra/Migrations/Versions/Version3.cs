@@ -12,6 +12,6 @@ public class Version3 : VersionBase
             .WithColumn("IncomeType").AsInt32().NotNullable()
             .WithColumn("DayOfMonth").AsByte().Nullable()
             .WithColumn("UseBusinessDay").AsBoolean().NotNullable()
-            .WithColumn("UserId").AsInt64().NotNullable().ForeignKey("FK_Incomes_User_Id", "User", "Id");
+            .WithColumn("UserId").AsInt64().NotNullable().ForeignKey("FK_Incomes_User_Id", "Users", "Id");
     }
 }
