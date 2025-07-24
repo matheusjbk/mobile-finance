@@ -142,6 +142,15 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The income could not be found..
+        /// </summary>
+        public static string INCOME_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("INCOME_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The provided income type is not supported..
         /// </summary>
         public static string INCOME_TYPE_NOT_SUPPORTED {
