@@ -73,6 +73,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<ITokenRepository, TokenRepository>();
         services.AddScoped<IIncomeWriteOnlyRepository, IncomeRepository>();
         services.AddScoped<IIncomeReadOnlyRepository, IncomeRepository>();
+        services.AddScoped<IIncomeUpdateOnlyRepository, IncomeRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 

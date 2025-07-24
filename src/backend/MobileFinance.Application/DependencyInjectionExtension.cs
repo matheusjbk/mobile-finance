@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MobileFinance.Application.Services.Mapster;
 using MobileFinance.Application.UseCases.Income.GetById;
 using MobileFinance.Application.UseCases.Income.Register;
+using MobileFinance.Application.UseCases.Income.Update;
 using MobileFinance.Application.UseCases.Login.DoLogin;
 using MobileFinance.Application.UseCases.Login.External;
 using MobileFinance.Application.UseCases.Token.RefreshToken;
@@ -64,5 +65,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
         services.AddScoped<IRegisterIncomeUseCase, RegisterIncomeUseCase>();
         services.AddScoped<IGetIncomeByIdUseCase, GetIncomeByIdUseCase>();
+        services.AddScoped<IUpdateIncomeUseCase, UpdateIncomeUseCase>();
     }
 }
