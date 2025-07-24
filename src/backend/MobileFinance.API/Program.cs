@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.OpenApi.Models;
 using MobileFinance.API.BackgroundServices;
 using MobileFinance.API.Converters;
 using MobileFinance.API.Filters;
@@ -12,12 +13,44 @@ using MobileFinance.Infra.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter)))
     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<IdFilter>();
+
+    const string BEARER = "Bearer";
+
+    options.AddSecurityDefinition(BEARER, new OpenApiSecurityScheme
+    {
+        Description = @"JWT Authorization header using the Bearer scheme.
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      Example: 'Bearer 1234abcdef'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = BEARER
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = BEARER
+                },
+                Scheme = "oauth2",
+                Name = BEARER,
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+});
 
 builder.Services.AddHttpContextAccessor();
 
@@ -35,7 +68,6 @@ if(!builder.Configuration.IsTestEnvironment())
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if(app.Environment.IsDevelopment())
 {
     app.UseSwagger();
