@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MobileFinance.API.Attributes;
+using MobileFinance.API.Binders;
+using MobileFinance.Application.UseCases.Income.GetById;
 using MobileFinance.Application.UseCases.Income.Register;
 using MobileFinance.Communication.Requests;
 using MobileFinance.Communication.Responses;
@@ -19,5 +21,18 @@ public class IncomeController : MobileFinanceBaseController
         var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseIncomeJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById(
+        IGetIncomeByIdUseCase useCase,
+        [FromRoute] [ModelBinder(typeof(MobileFinanceIdBinder))] long id)
+    {
+        var response = await useCase.Execute(id);
+
+        return Ok(response);
     }
 }
