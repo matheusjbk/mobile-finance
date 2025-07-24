@@ -39,7 +39,7 @@ public class RegisterIncomeUseCaseTest
             .ShouldBe(ExceptionMessages.EMPTY_INCOME_TITLE);
     }
 
-    private RegisterIncomeUseCase CreateUseCase(MobileFinance.Domain.Entities.User user)
+    private static RegisterIncomeUseCase CreateUseCase(MobileFinance.Domain.Entities.User user)
     {
         var loggedUser = LoggedUserBuilder.Build(user);
         var repository = IncomeWriteOnlyRepositoryBuilder.Build();
