@@ -21,7 +21,7 @@ public class GetIncomeByIdUseCase : IGetIncomeByIdUseCase
     {
         var loggedUser = await _loggedUser.GetUser();
 
-        var income = _repository.GetById(loggedUser, incomeId)
+        var income = await _repository.GetById(loggedUser, incomeId)
             ?? throw new NotFoundException(ExceptionMessages.INCOME_NOT_FOUND);
 
         return income.Adapt<ResponseIncomeJson>();
