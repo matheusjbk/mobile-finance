@@ -144,6 +144,9 @@
   <data name="EXPIRED_SESSION" xml:space="preserve">
     <value>Your session has expired. Please log in again to continue.</value>
   </data>
+  <data name="INCOME_NOT_FOUND" xml:space="preserve">
+    <value>The income could not be found.</value>
+  </data>
   <data name="INCOME_TYPE_NOT_SUPPORTED" xml:space="preserve">
     <value>The provided income type is not supported.</value>
   </data>
