@@ -34,5 +34,9 @@ public class MapsterConfiguration
         TypeAdapterConfig<Income, ResponseRegisteredIncomeJson>
             .NewConfig()
             .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
+
+        TypeAdapterConfig<Income, ResponseIncomeJson>
+            .NewConfig()
+            .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
     }
 }
