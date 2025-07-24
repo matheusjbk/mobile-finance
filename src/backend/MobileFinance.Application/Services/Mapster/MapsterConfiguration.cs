@@ -21,11 +21,18 @@ public class MapsterConfiguration
         TypeAdapterConfig<RequestRegisterUserJson, User>
             .NewConfig()
             .Ignore(dest => dest.Password);
+
+        TypeAdapterConfig<RequestIncomeJson, Income>
+            .NewConfig();
     }
 
-    private static void DomainToResponse()
+    private void DomainToResponse()
     {
         TypeAdapterConfig<User, ResponseUserProfileJson>
             .NewConfig();
+
+        TypeAdapterConfig<Income, ResponseIncomeJson>
+            .NewConfig()
+            .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
     }
 }
