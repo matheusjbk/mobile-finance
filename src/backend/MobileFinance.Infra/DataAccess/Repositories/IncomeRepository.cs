@@ -11,6 +11,12 @@ public class IncomeRepository : IIncomeWriteOnlyRepository, IIncomeReadOnlyRepos
 
     public async Task Add(Income income) => await _dbContext.Incomes.AddAsync(income);
 
+    public async Task Delete(long incomeId)
+    {
+        var income = await _dbContext.Incomes.FirstAsync(income => income.Active && income.Id.Equals(incomeId));
+        _dbContext.Incomes.Remove(income);
+    }
+
     async Task<Income?> IIncomeReadOnlyRepository.GetById(User user, long incomeId) => await GetFullIncome(user, incomeId, trackQuery: false);
 
     async Task<Income?> IIncomeUpdateOnlyRepository.GetById(User user, long incomeId) => await GetFullIncome(user, incomeId, trackQuery: true);

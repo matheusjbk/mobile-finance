@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MobileFinance.API.Attributes;
 using MobileFinance.API.Binders;
+using MobileFinance.Application.UseCases.Income.Delete;
 using MobileFinance.Application.UseCases.Income.GetById;
 using MobileFinance.Application.UseCases.Income.Register;
 using MobileFinance.Application.UseCases.Income.Update;
@@ -48,6 +49,19 @@ public class IncomeController : MobileFinanceBaseController
         [FromRoute][ModelBinder(typeof(MobileFinanceIdBinder))] long id)
     {
         await useCase.Execute(request, id);
+
+        return NoContent();
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(
+        IDeleteIncomeUseCase useCase,
+        [FromRoute][ModelBinder(typeof(MobileFinanceIdBinder))] long id)
+    {
+        await useCase.Execute(id);
 
         return NoContent();
     }
