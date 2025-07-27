@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DAY_OUT_OF_RANGE" xml:space="preserve">
-    <value>Dia especificado está fora do alcance.</value>
+  <data name="EMPTY_RECEIVED_DATE" xml:space="preserve">
+    <value>Você deve fornecer a data em que a renda foi recebida.</value>
   </data>
   <data name="DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
     <value>A senha fornecida é diferente da senha atual.</value>

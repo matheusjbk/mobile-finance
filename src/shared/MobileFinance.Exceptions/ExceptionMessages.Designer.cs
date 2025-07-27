@@ -61,15 +61,6 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specified day is out of range..
-        /// </summary>
-        public static string DAY_OUT_OF_RANGE {
-            get {
-                return ResourceManager.GetString("DAY_OUT_OF_RANGE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The password entered is different from the current password..
         /// </summary>
         public static string DIFFERENT_CURRENT_PASSWORD {
@@ -129,6 +120,15 @@ namespace MobileFinance.Exceptions {
         public static string EMPTY_PASSWORD {
             get {
                 return ResourceManager.GetString("EMPTY_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must provide the date when the income was received..
+        /// </summary>
+        public static string EMPTY_RECEIVED_DATE {
+            get {
+                return ResourceManager.GetString("EMPTY_RECEIVED_DATE", resourceCulture);
             }
         }
         
@@ -223,7 +223,7 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must select with true of false if the payment day is a business day or not..
+        ///   Looks up a localized string similar to You must select with true or false if the payment day is a business day or not..
         /// </summary>
         public static string USE_BUSINESS_DAY_NULL {
             get {

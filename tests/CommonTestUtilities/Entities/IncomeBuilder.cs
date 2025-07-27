@@ -12,7 +12,7 @@ public class IncomeBuilder
             .RuleFor(income => income.Title, f => f.Lorem.Word())
             .RuleFor(income => income.Amount, f => (long)f.Finance.Amount(max: 10000))
             .RuleFor(income => income.IncomeType, f => f.PickRandom<IncomeType>())
-            .RuleFor(income => income.DayOfMonth, f => f.Random.Byte(min: 1, max: 31))
+            .RuleFor(income => income.ReceivedOn, f => f.Date.Soon())
             .RuleFor(income => income.UseBusinessDay, f => f.Random.Bool())
             .RuleFor(income => income.UserId, user.Id);
     }

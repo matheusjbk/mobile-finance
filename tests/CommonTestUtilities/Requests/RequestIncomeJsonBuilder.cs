@@ -11,7 +11,7 @@ public class RequestIncomeJsonBuilder
             .RuleFor(request => request.Title, f => f.Lorem.Word())
             .RuleFor(request => request.Amount, f => (long)f.Finance.Amount(max: 10000))
             .RuleFor(request => request.IncomeType, f => f.PickRandom<IncomeType>())
-            .RuleFor(request => request.DayOfMonth, f => f.Random.Byte(min: 1, max: 31))
+            .RuleFor(request => request.ReceivedOn, f => f.Date.Soon())
             .RuleFor(request => request.UseBusinessDay, f => f.Random.Bool());
     }
 }
