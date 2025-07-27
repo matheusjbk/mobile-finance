@@ -19,19 +19,6 @@ public class IncomeValidatorTest
     }
 
     [Fact]
-    public void Success_Without_DayOfMonth()
-    {
-        var validator = new IncomeValidator();
-        var request = RequestIncomeJsonBuilder.Build();
-        request.IncomeType = IncomeType.OneTime;
-        request.DayOfMonth = null;
-
-        var validationResult = validator.Validate(request);
-
-        validationResult.IsValid.ShouldBeTrue();
-    }
-
-    [Fact]
     public void Success_Without_UseBusinessDay()
     {
         var validator = new IncomeValidator();
@@ -89,12 +76,12 @@ public class IncomeValidatorTest
         var validator = new IncomeValidator();
         var request = RequestIncomeJsonBuilder.Build();
         request.IncomeType = IncomeType.Salary;
-        request.DayOfMonth = 0;
+        request.ReceivedOn = default;
 
         var validationResult = validator.Validate(request);
 
         validationResult.IsValid.ShouldBeFalse();
-        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.DAY_OUT_OF_RANGE));
+        validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.EMPTY_RECEIVED_DATE));
     }
 
     [Fact]
