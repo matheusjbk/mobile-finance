@@ -127,7 +127,7 @@
     <value>O endereço de e-mail já está registrado.</value>
   </data>
   <data name="EMPTY_AMOUNT" xml:space="preserve">
-    <value>A quantia da renda não pode estar vazia.</value>
+    <value>A quantia da operação não pode estar vazia.</value>
   </data>
   <data name="EMPTY_EMAIL" xml:space="preserve">
     <value>O endereço de e-mail não pode estar vazio.</value>
@@ -176,5 +176,14 @@
   </data>
   <data name="USE_BUSINESS_DAY_NULL" xml:space="preserve">
     <value>Você deve selecionar com true ou false se o dia do pagamento é um dia útil ou não.</value>
+  </data>
+  <data name="EMPTY_DEBIT_TITLE" xml:space="preserve">
+    <value>O título do débito foi deixado em branco. Por favor forneça um título.</value>
+  </data>
+  <data name="DEBIT_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>O tipo de débito fornecido não é suportado.</value>
+  </data>
+  <data name="EMPTY_PAID_DATE" xml:space="preserve">
+    <value>Você deve fornecer a data em que o débito foi pago.</value>
   </data>
 </root>

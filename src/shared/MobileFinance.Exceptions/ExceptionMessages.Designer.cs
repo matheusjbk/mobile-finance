@@ -61,6 +61,15 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provided debit type is not supported..
+        /// </summary>
+        public static string DEBIT_TYPE_NOT_SUPPORTED {
+            get {
+                return ResourceManager.GetString("DEBIT_TYPE_NOT_SUPPORTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password entered is different from the current password..
         /// </summary>
         public static string DIFFERENT_CURRENT_PASSWORD {
@@ -79,11 +88,20 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Income&apos;s amount cannot be empty..
+        ///   Looks up a localized string similar to Operation&apos;s amount cannot be empty..
         /// </summary>
         public static string EMPTY_AMOUNT {
             get {
                 return ResourceManager.GetString("EMPTY_AMOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The debit title has been left blank. Please provide a title..
+        /// </summary>
+        public static string EMPTY_DEBIT_TITLE {
+            get {
+                return ResourceManager.GetString("EMPTY_DEBIT_TITLE", resourceCulture);
             }
         }
         
@@ -111,6 +129,15 @@ namespace MobileFinance.Exceptions {
         public static string EMPTY_NAME {
             get {
                 return ResourceManager.GetString("EMPTY_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must provide the date when the debit was paid..
+        /// </summary>
+        public static string EMPTY_PAID_DATE {
+            get {
+                return ResourceManager.GetString("EMPTY_PAID_DATE", resourceCulture);
             }
         }
         
