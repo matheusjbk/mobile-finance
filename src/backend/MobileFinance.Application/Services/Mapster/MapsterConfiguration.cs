@@ -24,6 +24,9 @@ public class MapsterConfiguration
 
         TypeAdapterConfig<RequestIncomeJson, Income>
             .NewConfig();
+
+        TypeAdapterConfig<RequestDebitJson, Debit>
+            .NewConfig();
     }
 
     private void DomainToResponse()
@@ -40,6 +43,10 @@ public class MapsterConfiguration
             .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
 
         TypeAdapterConfig<Income, ResponseShortIncomeJson>
+            .NewConfig()
+            .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
+
+        TypeAdapterConfig<Debit, ResponseRegisteredDebitJson>
             .NewConfig()
             .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
     }
