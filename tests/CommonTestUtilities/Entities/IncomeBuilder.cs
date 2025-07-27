@@ -5,6 +5,25 @@ using MobileFinance.Domain.Enums;
 namespace CommonTestUtilities.Entities;
 public class IncomeBuilder
 {
+    public static IList<Income> Collection(User user, uint count = 2)
+    {
+        var incomes = new List<Income>();
+
+        if(count == 0)
+            count = 1;
+
+        var incomeId = 1;
+
+        for(var i = 0; i < count; i++)
+        {
+            var income = Build(user);
+            income.Id = incomeId++;
+            incomes.Add(income);
+        }
+
+        return incomes;
+    }
+
     public static Income Build(User user)
     {
         return new Faker<Income>()

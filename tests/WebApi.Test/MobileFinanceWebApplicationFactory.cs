@@ -53,6 +53,7 @@ public class MobileFinanceWebApplicationFactory : WebApplicationFactory<Program>
     public string GetIncomeId() => IdEncoderBuilder.Build().Encode(_income.Id);
     public string GetIncomeTitle() => _income.Title;
     public IncomeType GetIncomeType() => _income.IncomeType;
+    public DateTime GetIncomeReveicedDate() => _income.ReceivedOn;
 
     private void StartDatabase(MobileFinanceDbContext dbContext)
     {
