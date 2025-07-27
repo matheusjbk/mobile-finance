@@ -33,6 +33,14 @@ public class MobileFinanceClassFixture : IClassFixture<MobileFinanceWebApplicati
         return await _client.PutAsJsonAsync(route, request);
     }
 
+    protected async Task<HttpResponseMessage> DoDelete(string route, string token, string culture = "en")
+    {
+        ChangeRequestCulture(culture);
+        AuthorizationRequest(token);
+
+        return await _client.DeleteAsync(route);
+    }
+
     private void ChangeRequestCulture(string culture)
     {
         if(_client.DefaultRequestHeaders.Contains("Accept-Language"))
