@@ -127,7 +127,7 @@
     <value>The e-mail address has already been registered.</value>
   </data>
   <data name="EMPTY_AMOUNT" xml:space="preserve">
-    <value>Income's amount cannot be empty.</value>
+    <value>Operation's amount cannot be empty.</value>
   </data>
   <data name="EMPTY_EMAIL" xml:space="preserve">
     <value>The e-mail address cannot be empty.</value>
@@ -176,5 +176,14 @@
   </data>
   <data name="USE_BUSINESS_DAY_NULL" xml:space="preserve">
     <value>You must select with true or false if the payment day is a business day or not.</value>
+  </data>
+  <data name="EMPTY_DEBIT_TITLE" xml:space="preserve">
+    <value>The debit title has been left blank. Please provide a title.</value>
+  </data>
+  <data name="DEBIT_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>The provided debit type is not supported.</value>
+  </data>
+  <data name="EMPTY_PAID_DATE" xml:space="preserve">
+    <value>You must provide the date when the debit was paid.</value>
   </data>
 </root>
