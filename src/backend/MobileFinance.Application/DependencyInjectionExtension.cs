@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MobileFinance.Application.Services.Mapster;
 using MobileFinance.Application.UseCases.Income.Delete;
+using MobileFinance.Application.UseCases.Income.GetByDayOfMonth;
 using MobileFinance.Application.UseCases.Income.GetById;
 using MobileFinance.Application.UseCases.Income.Register;
 using MobileFinance.Application.UseCases.Income.Update;
@@ -68,5 +69,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGetIncomeByIdUseCase, GetIncomeByIdUseCase>();
         services.AddScoped<IUpdateIncomeUseCase, UpdateIncomeUseCase>();
         services.AddScoped<IDeleteIncomeUseCase, DeleteIncomeUseCase>();
+        services.AddScoped<IGetIncomeByDayOfMonthUseCase, GetIncomeByDayOfMonthUseCase>();
     }
 }
