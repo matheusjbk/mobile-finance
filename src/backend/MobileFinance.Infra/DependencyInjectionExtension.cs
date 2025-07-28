@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MobileFinance.Domain.Repositories;
+using MobileFinance.Domain.Repositories.Debit;
 using MobileFinance.Domain.Repositories.Income;
 using MobileFinance.Domain.Repositories.RefreshToken;
 using MobileFinance.Domain.Repositories.User;
@@ -74,6 +75,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IIncomeWriteOnlyRepository, IncomeRepository>();
         services.AddScoped<IIncomeReadOnlyRepository, IncomeRepository>();
         services.AddScoped<IIncomeUpdateOnlyRepository, IncomeRepository>();
+        services.AddScoped<IDebitWriteOnlyRepository, DebitRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
