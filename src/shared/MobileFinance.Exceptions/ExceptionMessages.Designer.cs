@@ -61,6 +61,15 @@ namespace MobileFinance.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The debit could not be found..
+        /// </summary>
+        public static string DEBIT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("DEBIT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The provided debit type is not supported..
         /// </summary>
         public static string DEBIT_TYPE_NOT_SUPPORTED {

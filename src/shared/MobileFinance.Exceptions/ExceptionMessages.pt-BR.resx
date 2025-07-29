@@ -186,4 +186,7 @@
   <data name="EMPTY_PAID_DATE" xml:space="preserve">
     <value>Você deve fornecer a data em que o débito foi pago.</value>
   </data>
+  <data name="DEBIT_NOT_FOUND" xml:space="preserve">
+    <value>Não foi possível encontrar o débito.</value>
+  </data>
 </root>
