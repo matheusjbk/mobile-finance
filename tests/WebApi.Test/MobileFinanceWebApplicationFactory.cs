@@ -16,6 +16,7 @@ public class MobileFinanceWebApplicationFactory : WebApplicationFactory<Program>
     private string _password = string.Empty;
     private RefreshToken _refreshToken = default!;
     private MobileFinance.Domain.Entities.Income _income = default!;
+    private MobileFinance.Domain.Entities.Debit _debit = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -55,11 +56,17 @@ public class MobileFinanceWebApplicationFactory : WebApplicationFactory<Program>
     public IncomeType GetIncomeType() => _income.IncomeType;
     public DateTime GetIncomeReveicedDate() => _income.ReceivedOn;
 
+    public string GetDebitId() => IdEncoderBuilder.Build().Encode(_debit.Id);
+    public string GetDebitTitle() => _debit.Title;
+    public DebitType GetDebitType() => _debit.DebitType;
+    public DateTime GetDebitPaidDate() => _debit.PaidOn;
+
     private void StartDatabase(MobileFinanceDbContext dbContext)
     {
         (_user, _password) = UserBuilder.Build();
         _refreshToken = RefreshTokenBuilder.Build(_user);
         _income = IncomeBuilder.Build(_user);
+        _debit = DebitBuilder.Build(_user);
 
 
         dbContext.Database.EnsureDeleted();
@@ -67,6 +74,7 @@ public class MobileFinanceWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.Users.Add(_user);
         dbContext.RefreshTokens.Add(_refreshToken);
         dbContext.Incomes.Add(_income);
+        dbContext.Debits.Add(_debit);
 
         dbContext.SaveChanges();
     }

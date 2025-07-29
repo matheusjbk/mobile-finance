@@ -4,7 +4,7 @@ namespace MobileFinance.Domain.Entities;
 public class Debit : EntityBase
 {
     public string Title { get; set; } = string.Empty;
-    public int Amount { get; set; }
+    public long Amount { get; set; }
     public DebitType DebitType { get; set; }
     public DateTime PaidOn { get; set; }
     public bool UseBusinessDay { get; set; } = false;
