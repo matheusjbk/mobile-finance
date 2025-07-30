@@ -3,6 +3,7 @@ using MobileFinance.API.Attributes;
 using MobileFinance.API.Binders;
 using MobileFinance.Application.UseCases.Debit.GetById;
 using MobileFinance.Application.UseCases.Debit.Register;
+using MobileFinance.Application.UseCases.Debit.Update;
 using MobileFinance.Communication.Requests;
 using MobileFinance.Communication.Responses;
 
@@ -34,5 +35,20 @@ public class DebitController : MobileFinanceBaseController
         var response = await useCase.Execute(id);
 
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(
+        IUpdateDebitUseCase useCase,
+        RequestDebitJson request,
+        [FromRoute][ModelBinder(typeof(MobileFinanceIdBinder))] long id)
+    {
+        await useCase.Execute(request, id);
+
+        return NoContent();
     }
 }
