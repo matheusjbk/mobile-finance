@@ -10,6 +10,13 @@ public class DebitRepository : IDebitWriteOnlyRepository, IDebitReadOnlyReposito
     public DebitRepository(MobileFinanceDbContext dbContext) => _dbContext = dbContext;
 
     public async Task Add(Debit debit) => await _dbContext.Debits.AddAsync(debit);
+
+    public async Task Delete(long debitId)
+    {
+        var debit = await _dbContext.Debits.FirstAsync(debit => debit.Active && debit.Id.Equals(debitId));
+        _dbContext.Debits.Remove(debit);
+    }
+
     async Task<Debit?> IDebitReadOnlyRepository.GetById(User user, long debitId) => await GetFullDebit(user, debitId, trackQuery: false);
 
     async Task<Debit?> IDebitUpdateOnlyRepository.GetById(User user, long debitId) => await GetFullDebit(user, debitId, trackQuery: true);
