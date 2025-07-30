@@ -29,7 +29,7 @@ public class DeleteDebitUseCase : IDeleteDebitUseCase
     {
         var loggedUser = await _loggedUser.GetUser();
 
-        _ = _readOnlyRepository.GetById(loggedUser, debitId)
+        _ = await _readOnlyRepository.GetById(loggedUser, debitId)
             ?? throw new NotFoundException(ExceptionMessages.DEBIT_NOT_FOUND);
 
         await _writeOnlyRepository.Delete(debitId);
