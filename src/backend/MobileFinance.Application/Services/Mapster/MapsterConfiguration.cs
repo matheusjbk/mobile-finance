@@ -53,5 +53,9 @@ public class MapsterConfiguration
         TypeAdapterConfig<Debit, ResponseDebitJson>
             .NewConfig()
             .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
+
+        TypeAdapterConfig<Debit, ResponseShortDebitJson>
+            .NewConfig()
+            .Map(dest => dest.Id, src => _idEncoder.Encode(src.Id));
     }
 }
