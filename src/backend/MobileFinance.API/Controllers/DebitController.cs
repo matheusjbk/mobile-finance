@@ -2,6 +2,7 @@
 using MobileFinance.API.Attributes;
 using MobileFinance.API.Binders;
 using MobileFinance.Application.UseCases.Debit.Delete;
+using MobileFinance.Application.UseCases.Debit.GetByDayOfMonth;
 using MobileFinance.Application.UseCases.Debit.GetById;
 using MobileFinance.Application.UseCases.Debit.Register;
 using MobileFinance.Application.UseCases.Debit.Update;
@@ -62,6 +63,22 @@ public class DebitController : MobileFinanceBaseController
         [FromRoute][ModelBinder(typeof(MobileFinanceIdBinder))] long id)
     {
         await useCase.Execute(id);
+
+        return NoContent();
+    }
+
+    [HttpPost]
+    [Route("filter-by-day")]
+    [ProducesResponseType(typeof(ResponseDebitsJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetByDayOfMonth(
+        IGetDebitByDayOfMonthUseCase useCase,
+        RequestFilterDebitsJson request)
+    {
+        var response = await useCase.Execute(request);
+
+        if(response.Debits.Any())
+            return Ok(response);
 
         return NoContent();
     }
