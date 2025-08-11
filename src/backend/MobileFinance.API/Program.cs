@@ -53,10 +53,12 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
 
 builder.Services.AddInfra(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+builder.Services.AddHostedService<CalendarSeederService>();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 

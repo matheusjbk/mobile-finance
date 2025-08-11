@@ -19,6 +19,7 @@ using MobileFinance.Infra.Security.Tokens.AccessToken.Generator;
 using MobileFinance.Infra.Security.Tokens.AccessToken.Validator;
 using MobileFinance.Infra.Security.Tokens.RefreshToken;
 using MobileFinance.Infra.Services.LoggedUser;
+using MobileFinance.Infra.Services.Seeding;
 using MobileFinance.Infra.Services.ServiceBus;
 using System.Reflection;
 
@@ -31,6 +32,7 @@ public static class DependencyInjectionExtension
         AddPasswordEncrypter(services);
         AddTokens(services, configuration);
         AddLoggedUser(services);
+        AddSeeder(services);
 
         if(configuration.IsTestEnvironment())
             return;
@@ -102,4 +104,6 @@ public static class DependencyInjectionExtension
 
         services.AddSingleton<IDeleteUserQueue>(provider => new DeleteUserQueue(hostName, queueName));
     }
+
+    private static void AddSeeder(IServiceCollection services) => services.AddScoped<CalendarSeeder>();
 }
