@@ -5,4 +5,5 @@ public abstract class DatabaseVersions
     public const int REFRESH_TOKEN_TABLE = 2;
     public const int INCOMES_TABLE = 3;
     public const int DEBITS_TABLE = 4;
+    public const int CALENDAR_DAYS_TABLE = 5;
 }

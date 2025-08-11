@@ -10,6 +10,7 @@ public class MobileFinanceDbContext : DbContext
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Income> Incomes { get; set; }
     public DbSet<Debit> Debits { get; set; }
+    public DbSet<CalendarDay> CalendarDays { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) =>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MobileFinanceDbContext).Assembly);
