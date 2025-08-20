@@ -23,6 +23,11 @@ public class DebitRepository : IDebitWriteOnlyRepository, IDebitReadOnlyReposito
         await _dbContext.Debits.AsNoTracking()
             .Where(debit => debit.Active && debit.UserId.Equals(user.Id) && debit.PaidOn.Date.Equals(date.Date)).ToListAsync();
 
+    public async Task<IEnumerable<Debit>> GetByPeriod(User user, DateTime start, DateTime end) => 
+        await _dbContext.Debits.AsNoTracking()
+            .Where(debit => debit.Active && debit.UserId.Equals(user.Id) && debit.PaidOn.Date >= start.Date && debit.PaidOn.Date <= end.Date)
+            .ToListAsync();
+
     async Task<Debit?> IDebitUpdateOnlyRepository.GetById(User user, long debitId) => await GetFullDebit(user, debitId, trackQuery: true);
 
     public void Update(Debit debit) => _dbContext.Debits.Update(debit);

@@ -23,6 +23,11 @@ public class IncomeRepository : IIncomeWriteOnlyRepository, IIncomeReadOnlyRepos
         await _dbContext.Incomes.AsNoTracking()
             .Where(income => income.Active && income.UserId.Equals(user.Id) && income.ReceivedOn.Date.Equals(date.Date)).ToListAsync();
 
+    public async Task<IEnumerable<Income>> GetByPeriod(User user, DateTime start, DateTime end) => 
+        await _dbContext.Incomes.AsNoTracking()
+            .Where(income => income.Active && income.UserId.Equals(user.Id) && income.ReceivedOn.Date >= start.Date && income.ReceivedOn.Date <= end.Date)
+            .ToListAsync();
+
     async Task<Income?> IIncomeUpdateOnlyRepository.GetById(User user, long incomeId) => await GetFullIncome(user, incomeId, trackQuery: true);
 
     public void Update(Income income) => _dbContext.Incomes.Update(income);
