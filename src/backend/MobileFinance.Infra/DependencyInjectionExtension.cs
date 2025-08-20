@@ -9,6 +9,7 @@ using MobileFinance.Domain.Repositories.RefreshToken;
 using MobileFinance.Domain.Repositories.User;
 using MobileFinance.Domain.Security.Cryptography;
 using MobileFinance.Domain.Security.Tokens;
+using MobileFinance.Domain.Services.Calendar;
 using MobileFinance.Domain.Services.LoggedUser;
 using MobileFinance.Domain.Services.ServiceBus;
 using MobileFinance.Infra.DataAccess;
@@ -18,6 +19,7 @@ using MobileFinance.Infra.Security.Cryptography;
 using MobileFinance.Infra.Security.Tokens.AccessToken.Generator;
 using MobileFinance.Infra.Security.Tokens.AccessToken.Validator;
 using MobileFinance.Infra.Security.Tokens.RefreshToken;
+using MobileFinance.Infra.Services.Calendar;
 using MobileFinance.Infra.Services.LoggedUser;
 using MobileFinance.Infra.Services.Seeding;
 using MobileFinance.Infra.Services.ServiceBus;
@@ -33,6 +35,7 @@ public static class DependencyInjectionExtension
         AddTokens(services, configuration);
         AddLoggedUser(services);
         AddSeeder(services);
+        AddRecurrenceService(services);
 
         if(configuration.IsTestEnvironment())
             return;
@@ -106,4 +109,6 @@ public static class DependencyInjectionExtension
     }
 
     private static void AddSeeder(IServiceCollection services) => services.AddScoped<CalendarSeeder>();
+
+    private static void AddRecurrenceService(IServiceCollection services) => services.AddScoped<IRecurrenceService, RecurrenceService>();
 }
