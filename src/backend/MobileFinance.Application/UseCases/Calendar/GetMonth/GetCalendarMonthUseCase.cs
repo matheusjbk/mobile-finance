@@ -27,7 +27,7 @@ public class GetCalendarMonthUseCase : IGetCalendarMonthUseCase
 
     public async Task<ResponseCalendarMonthJson> Execute(int year, int month)
     {
-        var start = new DateTime(year, month, 1);
+        var start = new DateTime(year, month, day: 1, hour: 0, minute: 0, second: 0, kind: DateTimeKind.Utc);
         var end = start.AddMonths(1).AddDays(-1);
 
         var loggedUser = await _loggedUser.GetUser();
