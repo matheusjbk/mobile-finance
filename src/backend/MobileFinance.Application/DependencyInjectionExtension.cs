@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MobileFinance.Application.Services.Mapster;
+using MobileFinance.Application.UseCases.Calendar.GetMonth;
 using MobileFinance.Application.UseCases.Debit.Delete;
 using MobileFinance.Application.UseCases.Debit.GetByDayOfMonth;
 using MobileFinance.Application.UseCases.Debit.GetById;
@@ -80,5 +81,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUpdateDebitUseCase, UpdateDebitUseCase>();
         services.AddScoped<IDeleteDebitUseCase, DeleteDebitUseCase>();
         services.AddScoped<IGetDebitByDayOfMonthUseCase, GetDebitByDayOfMonthUseCase>();
+        services.AddScoped<IGetCalendarMonthUseCase, GetCalendarMonthUseCase>();
     }
 }
