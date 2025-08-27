@@ -32,8 +32,10 @@ public class GetCalendarDayUseCase : IGetCalendarDayUseCase
         var incomes = await _incomeReadOnlyRepository.GetByDayOfMonth(loggedUser, date);
         var debits = await _debitReadOnlyRepository.GetByDayOfMonth(loggedUser, date);
 
-        var incomeOccurrences = incomes.SelectMany(i => _recurrenceService.GetOcurrences(i, date, date)).ToList();
-        var debitOccurrences = debits.SelectMany(d => _recurrenceService.GetOcurrences(d, date, date)).ToList();
+        var endDate = date.AddDays(1).AddTicks(-1);
+
+        var incomeOccurrences = incomes.SelectMany(i => _recurrenceService.GetOcurrences(i, date, endDate)).ToList();
+        var debitOccurrences = debits.SelectMany(d => _recurrenceService.GetOcurrences(d, date, endDate)).ToList();
 
         var dayIncomes = incomeOccurrences
                 .Where(occurrence => occurrence.date.Date == date.Date)
