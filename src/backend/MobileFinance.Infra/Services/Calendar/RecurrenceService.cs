@@ -24,7 +24,7 @@ public class RecurrenceService : IRecurrenceService
             if(currentDate >= start && currentDate <= end)
                 occurrences.Add((currentDate, income));
 
-            currentDate.AddMonths(1);
+            currentDate = currentDate.AddMonths(1);
         }
 
         return occurrences;
