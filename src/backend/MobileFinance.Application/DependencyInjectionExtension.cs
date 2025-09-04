@@ -5,12 +5,10 @@ using MobileFinance.Application.Services.Mapster;
 using MobileFinance.Application.UseCases.Calendar.GetDay;
 using MobileFinance.Application.UseCases.Calendar.GetMonth;
 using MobileFinance.Application.UseCases.Debit.Delete;
-using MobileFinance.Application.UseCases.Debit.GetByDayOfMonth;
 using MobileFinance.Application.UseCases.Debit.GetById;
 using MobileFinance.Application.UseCases.Debit.Register;
 using MobileFinance.Application.UseCases.Debit.Update;
 using MobileFinance.Application.UseCases.Income.Delete;
-using MobileFinance.Application.UseCases.Income.GetByDayOfMonth;
 using MobileFinance.Application.UseCases.Income.GetById;
 using MobileFinance.Application.UseCases.Income.Register;
 using MobileFinance.Application.UseCases.Income.Update;
@@ -76,12 +74,10 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGetIncomeByIdUseCase, GetIncomeByIdUseCase>();
         services.AddScoped<IUpdateIncomeUseCase, UpdateIncomeUseCase>();
         services.AddScoped<IDeleteIncomeUseCase, DeleteIncomeUseCase>();
-        services.AddScoped<IGetIncomeByDayOfMonthUseCase, GetIncomeByDayOfMonthUseCase>();
         services.AddScoped<IRegisterDebitUseCase, RegisterDebitUseCase>();
         services.AddScoped<IGetDebitByIdUseCase, GetDebitByIdUseCase>();
         services.AddScoped<IUpdateDebitUseCase, UpdateDebitUseCase>();
         services.AddScoped<IDeleteDebitUseCase, DeleteDebitUseCase>();
-        services.AddScoped<IGetDebitByDayOfMonthUseCase, GetDebitByDayOfMonthUseCase>();
         services.AddScoped<IGetCalendarMonthUseCase, GetCalendarMonthUseCase>();
         services.AddScoped<IGetCalendarDayUseCase, GetCalendarDayUseCase>();
     }

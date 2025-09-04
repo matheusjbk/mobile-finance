@@ -16,13 +16,6 @@ public class DebitReadOnlyRepositoryBuilder
         return this;
     }
 
-    public DebitReadOnlyRepositoryBuilder GetByDayOfMonth(User user, IList<Debit> debits)
-    {
-        _mock.Setup(repo => repo.GetByDayOfMonth(user, It.IsAny<DateTime>())).ReturnsAsync(debits);
-
-        return this;
-    }
-
     public DebitReadOnlyRepositoryBuilder GetByPeriod(User user, IList<Debit> debits)
     {
         _mock.Setup(repo => repo.GetByPeriod(user, It.IsAny<DateTime>(), It.IsAny<DateTime>())).ReturnsAsync(debits);

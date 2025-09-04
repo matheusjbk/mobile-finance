@@ -46,8 +46,8 @@ public class GetCalendarDayUseCaseTest
             recurrenceServiceBuilder.GetOcurrences(incomes);
             recurrenceServiceBuilder.GetOcurrences(debits);
 
-            incomeReadOnlyRepositoryBuilder.GetByDayOfMonth(user, incomes);
-            debitReadOnlyRepositoryBuilder.GetByDayOfMonth(user, debits);
+            incomeReadOnlyRepositoryBuilder.GetByPeriod(user, incomes);
+            debitReadOnlyRepositoryBuilder.GetByPeriod(user, debits);
         }
 
         return new GetCalendarDayUseCase(
