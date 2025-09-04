@@ -20,10 +20,6 @@ public class IncomeRepository : IIncomeWriteOnlyRepository, IIncomeReadOnlyRepos
 
     async Task<Income?> IIncomeReadOnlyRepository.GetById(User user, long incomeId) => await GetFullIncome(user, incomeId, trackQuery: false);
 
-    public async Task<IList<Income>> GetByDayOfMonth(User user, DateTime date) => 
-        await _dbContext.Incomes.AsNoTracking()
-            .Where(income => income.Active && income.UserId.Equals(user.Id) && income.ReceivedOn.Date.Equals(date.Date)).ToListAsync();
-
     public async Task<IEnumerable<Income>> GetByPeriod(User user, DateTime start, DateTime end) => 
         await _dbContext.Incomes.AsNoTracking()
             .Where(income => income.Active && income.UserId.Equals(user.Id) && 

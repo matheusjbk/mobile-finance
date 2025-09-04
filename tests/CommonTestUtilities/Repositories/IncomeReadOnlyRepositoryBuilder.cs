@@ -16,13 +16,6 @@ public class IncomeReadOnlyRepositoryBuilder
         return this;
     }
 
-    public IncomeReadOnlyRepositoryBuilder GetByDayOfMonth(User user, IList<Income> incomes)
-    {
-        _mock.Setup(repo => repo.GetByDayOfMonth(user, It.IsAny<DateTime>())).ReturnsAsync(incomes);
-
-        return this;
-    }
-
     public IncomeReadOnlyRepositoryBuilder GetByPeriod(User user, IList<Income> incomes)
     {
         _mock.Setup(repo => repo.GetByPeriod(user, It.IsAny<DateTime>(), It.IsAny<DateTime>())).ReturnsAsync(incomes);

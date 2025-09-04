@@ -2,7 +2,6 @@
 using MobileFinance.API.Attributes;
 using MobileFinance.API.Binders;
 using MobileFinance.Application.UseCases.Income.Delete;
-using MobileFinance.Application.UseCases.Income.GetByDayOfMonth;
 using MobileFinance.Application.UseCases.Income.GetById;
 using MobileFinance.Application.UseCases.Income.Register;
 using MobileFinance.Application.UseCases.Income.Update;
@@ -63,22 +62,6 @@ public class IncomeController : MobileFinanceBaseController
         [FromRoute][ModelBinder(typeof(MobileFinanceIdBinder))] long id)
     {
         await useCase.Execute(id);
-
-        return NoContent();
-    }
-
-    [HttpPost]
-    [Route("filter-by-day")]
-    [ProducesResponseType(typeof(ResponseIncomesJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> GetByDayOfMonth(
-        IGetIncomeByDayOfMonthUseCase useCase,
-        RequestFilterIncomesJson request)
-    {
-        var response = await useCase.Execute(request);
-
-        if(response.Incomes.Any())
-            return Ok(response);
 
         return NoContent();
     }
