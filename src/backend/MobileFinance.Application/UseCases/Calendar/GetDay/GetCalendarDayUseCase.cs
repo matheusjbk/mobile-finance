@@ -29,10 +29,11 @@ public class GetCalendarDayUseCase : IGetCalendarDayUseCase
     {
         var loggedUser = await _loggedUser.GetUser();
 
-        var incomes = await _incomeReadOnlyRepository.GetByDayOfMonth(loggedUser, date);
-        var debits = await _debitReadOnlyRepository.GetByDayOfMonth(loggedUser, date);
-
         var endDate = date.AddDays(1).AddTicks(-1);
+
+        var incomes = await _incomeReadOnlyRepository.GetByPeriod(loggedUser, date, endDate);
+        var debits = await _debitReadOnlyRepository.GetByPeriod(loggedUser, date, endDate);
+
 
         var incomeOccurrences = incomes.SelectMany(i => _recurrenceService.GetOcurrences(i, date, endDate)).ToList();
         var debitOccurrences = debits.SelectMany(d => _recurrenceService.GetOcurrences(d, date, endDate)).ToList();
