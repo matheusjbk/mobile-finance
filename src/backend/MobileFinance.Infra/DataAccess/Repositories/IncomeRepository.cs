@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MobileFinance.Domain.Entities;
+using MobileFinance.Domain.Enums;
 using MobileFinance.Domain.Repositories.Income;
 
 namespace MobileFinance.Infra.DataAccess.Repositories;
@@ -25,7 +26,12 @@ public class IncomeRepository : IIncomeWriteOnlyRepository, IIncomeReadOnlyRepos
 
     public async Task<IEnumerable<Income>> GetByPeriod(User user, DateTime start, DateTime end) => 
         await _dbContext.Incomes.AsNoTracking()
-            .Where(income => income.Active && income.UserId.Equals(user.Id) && income.ReceivedOn.Date >= start.Date && income.ReceivedOn.Date <= end.Date)
+            .Where(income => income.Active && income.UserId.Equals(user.Id) && 
+                (
+                    (income.IncomeType.Equals(IncomeType.OneTime) && income.ReceivedOn.Date >= start.Date && income.ReceivedOn.Date <= end.Date) ||
+            
+                    ((income.IncomeType.Equals(IncomeType.Rent) || income.IncomeType.Equals(IncomeType.Salary)) && income.ReceivedOn.Date <= end.Date)
+                ))
             .ToListAsync();
 
     async Task<Income?> IIncomeUpdateOnlyRepository.GetById(User user, long incomeId) => await GetFullIncome(user, incomeId, trackQuery: true);

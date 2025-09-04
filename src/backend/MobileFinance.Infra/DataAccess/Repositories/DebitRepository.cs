@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MobileFinance.Domain.Entities;
+using MobileFinance.Domain.Enums;
 using MobileFinance.Domain.Repositories.Debit;
 
 namespace MobileFinance.Infra.DataAccess.Repositories;
@@ -25,7 +26,11 @@ public class DebitRepository : IDebitWriteOnlyRepository, IDebitReadOnlyReposito
 
     public async Task<IEnumerable<Debit>> GetByPeriod(User user, DateTime start, DateTime end) => 
         await _dbContext.Debits.AsNoTracking()
-            .Where(debit => debit.Active && debit.UserId.Equals(user.Id) && debit.PaidOn.Date >= start.Date && debit.PaidOn.Date <= end.Date)
+            .Where(debit => debit.Active && debit.UserId.Equals(user.Id) && 
+                (
+                    (debit.DebitType.Equals(DebitType.OneTime) && debit.PaidOn.Date >= start.Date && debit.PaidOn.Date <= end.Date) || 
+                    (debit.DebitType.Equals(DebitType.Recurring) && debit.PaidOn.Date <= end.Date)
+                ))
             .ToListAsync();
 
     async Task<Debit?> IDebitUpdateOnlyRepository.GetById(User user, long debitId) => await GetFullDebit(user, debitId, trackQuery: true);
