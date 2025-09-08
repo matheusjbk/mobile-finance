@@ -21,7 +21,7 @@ public class RecurrenceService : IRecurrenceService
 
         while(currentDate <= end)
         {
-            if(currentDate >= start && currentDate <= end)
+            if(currentDate <= end)
                 occurrences.Add((currentDate, income));
 
             currentDate = currentDate.AddMonths(1);
@@ -45,7 +45,7 @@ public class RecurrenceService : IRecurrenceService
 
         while(currentDate <= end)
         {
-            if(currentDate >= start && currentDate <= end)
+            if(currentDate <= end)
                 occurrences.Add((currentDate, debit));
 
             currentDate = currentDate.AddMonths(1);

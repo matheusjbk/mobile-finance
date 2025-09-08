@@ -36,6 +36,7 @@ public static class DependencyInjectionExtension
         AddLoggedUser(services);
         AddSeeder(services);
         AddRecurrenceService(services);
+        AddBusinessDayService(services);
 
         if(configuration.IsTestEnvironment())
             return;
@@ -111,4 +112,6 @@ public static class DependencyInjectionExtension
     private static void AddSeeder(IServiceCollection services) => services.AddScoped<CalendarSeeder>();
 
     private static void AddRecurrenceService(IServiceCollection services) => services.AddScoped<IRecurrenceService, RecurrenceService>();
+
+    private static void AddBusinessDayService(IServiceCollection services) => services.AddScoped<IBusinessDayService, BusinessDayService>();
 }
