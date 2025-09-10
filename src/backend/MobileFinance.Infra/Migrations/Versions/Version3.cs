@@ -10,6 +10,7 @@ public class Version3 : VersionBase
             .WithColumn("Title").AsString().NotNullable()
             .WithColumn("Amount").AsInt64().NotNullable()
             .WithColumn("IncomeType").AsInt32().NotNullable()
+            .WithColumn("RecurrenceMonthsCount").AsInt32().Nullable()
             .WithColumn("ReceivedOn").AsDateTime().NotNullable()
             .WithColumn("UseBusinessDay").AsBoolean().NotNullable()
             .WithColumn("UserId").AsInt64().NotNullable().ForeignKey("FK_Incomes_User_Id", "Users", "Id");
