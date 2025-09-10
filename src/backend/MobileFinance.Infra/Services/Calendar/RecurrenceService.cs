@@ -18,13 +18,18 @@ public class RecurrenceService : IRecurrenceService
         }
 
         var currentDate = income.ReceivedOn;
+        var count = 0;
 
         while(currentDate <= end)
         {
-            if(currentDate <= end)
+            if(income.RecurrenceMonthsCount.HasValue && count >= income.RecurrenceMonthsCount.Value)
+                break;
+
+            if(currentDate >= start)
                 occurrences.Add((currentDate, income));
 
             currentDate = currentDate.AddMonths(1);
+            count++;
         }
 
         return occurrences;
@@ -42,13 +47,18 @@ public class RecurrenceService : IRecurrenceService
         }
 
         var currentDate = debit.PaidOn;
+        var count = 0;
 
         while(currentDate <= end)
         {
-            if(currentDate <= end)
+            if(debit.RecurrenceMonthsCount.HasValue && count >= debit.RecurrenceMonthsCount.Value)
+                break;
+
+            if(currentDate >= start)
                 occurrences.Add((currentDate, debit));
 
             currentDate = currentDate.AddMonths(1);
+            count++;
         }
 
         return occurrences;
