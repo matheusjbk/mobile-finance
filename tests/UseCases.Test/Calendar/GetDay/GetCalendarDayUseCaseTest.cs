@@ -1,4 +1,5 @@
-﻿using CommonTestUtilities.Entities;
+﻿using CommonTestUtilities.BusinessDayService;
+using CommonTestUtilities.Entities;
 using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.RecurrenceService;
 using CommonTestUtilities.Repositories;
@@ -13,6 +14,19 @@ public class GetCalendarDayUseCaseTest
     {
         (var user, _) = UserBuilder.Build();
         var date = DateTime.UtcNow.Date;
+        DateTime returnDate;
+        while(true)
+        {
+            var scopeDate = date;
+            if(!(scopeDate.DayOfWeek == DayOfWeek.Sunday) || !(scopeDate.DayOfWeek == DayOfWeek.Saturday))
+            {
+                returnDate = scopeDate;
+                break;
+            }
+
+            scopeDate = scopeDate.AddDays(1);
+        }
+
         var incomes = IncomeBuilder.Collection(user, 3);
         var debits = DebitBuilder.Collection(user, 3);
 
@@ -22,7 +36,7 @@ public class GetCalendarDayUseCaseTest
         foreach(var debit in debits)
             debit.PaidOn = date;
 
-        var useCase = CreateUseCase(user, incomes, debits);
+        var useCase = CreateUseCase(user, date, returnDate, incomes, debits);
 
         var response = await useCase.Execute(date);
 
@@ -33,6 +47,8 @@ public class GetCalendarDayUseCaseTest
 
     private static GetCalendarDayUseCase CreateUseCase(
         MobileFinance.Domain.Entities.User user,
+        DateTime date,
+        DateTime returnDate,
         IList<MobileFinance.Domain.Entities.Income>? incomes = null,
         IList<MobileFinance.Domain.Entities.Debit>? debits = null)
     {
@@ -40,6 +56,7 @@ public class GetCalendarDayUseCaseTest
         var recurrenceServiceBuilder = new RecurrenceServiceBuilder();
         var incomeReadOnlyRepositoryBuilder = new IncomeReadOnlyRepositoryBuilder();
         var debitReadOnlyRepositoryBuilder = new DebitReadOnlyRepositoryBuilder();
+        var businessDayService = new BusinessDayServiceBuilder().GetNextBusinessDay(date, returnDate).Build();
 
         if(incomes is not null && debits is not null)
         {
@@ -54,6 +71,7 @@ public class GetCalendarDayUseCaseTest
             loggedUser,
             recurrenceServiceBuilder.Build(),
             incomeReadOnlyRepositoryBuilder.Build(),
-            debitReadOnlyRepositoryBuilder.Build());
+            debitReadOnlyRepositoryBuilder.Build(),
+            businessDayService);
     }
 }
