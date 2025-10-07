@@ -56,7 +56,7 @@ public class GetCalendarDayUseCaseTest
         var recurrenceServiceBuilder = new RecurrenceServiceBuilder();
         var incomeReadOnlyRepositoryBuilder = new IncomeReadOnlyRepositoryBuilder();
         var debitReadOnlyRepositoryBuilder = new DebitReadOnlyRepositoryBuilder();
-        var businessDayService = new BusinessDayServiceBuilder().GetNextBusinessDay(date, returnDate).Build();
+        var businessDayService = new BusinessDayServiceBuilder().GetNextBusinessDay(date, returnDate).GetNthBusinessDay(date, returnDate).Build();
 
         if(incomes is not null && debits is not null)
         {

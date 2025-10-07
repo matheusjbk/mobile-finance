@@ -12,7 +12,7 @@ public class RecurrenceServiceBuilder
     public RecurrenceServiceBuilder GetOcurrences(IList<Income> incomes)
     {
         foreach(var income in incomes)
-            _mock.Setup(repo => repo.GetOcurrences(income, It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(new List<(DateTime, Income)> { (income.ReceivedOn, income) });
+            _mock.Setup(repo => repo.GetOcurrences(income, It.IsAny<DateTime>(), It.IsAny<DateTime>())).ReturnsAsync(new List<(DateTime, Income)> { (income.ReceivedOn!.Value, income) });
 
         return this;
     }

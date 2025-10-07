@@ -15,5 +15,12 @@ public class BusinessDayServiceBuilder
         return this;
     }
 
+    public BusinessDayServiceBuilder GetNthBusinessDay(DateTime date, DateTime returnDate)
+    {
+        _mock.Setup(service => service.GetNthBusinessDay(date.Year, date.Month, date.Day)).ReturnsAsync(returnDate);
+
+        return this;
+    }
+
     public IBusinessDayService Build() => _mock.Object;
 }

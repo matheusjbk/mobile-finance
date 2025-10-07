@@ -22,7 +22,7 @@ public class GetCalendarMonthTest : MobileFinanceClassFixture
         var year = _incomeReceivedOn.Year;
         var month = _incomeReceivedOn.Month;
 
-        var response = await DoGet(route: $"{ROUTE}?year={year}&month={month}", token: token);
+        var response = await DoGet(route: $"{ROUTE}?year={year:D4}&month={month:D2}", token: token);
 
         response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 

@@ -23,7 +23,9 @@ public class GetCalendarDayTest : MobileFinanceClassFixture
         var month = _incomeReceivedOn.Month;
         var day = _incomeReceivedOn.Day;
 
-        var response = await DoGet(route: $"{ROUTE}?date={year}-{month}-{day}", token: token);
+        var dateString = $"{year:D4}-{month:D2}-{day:D2}";
+
+        var response = await DoGet(route: $"{ROUTE}?date={dateString}", token: token);
 
         response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 

@@ -32,6 +32,19 @@ public class DebitValidatorTest
     }
 
     [Fact]
+    public void Success_Without_RecurrenceMonthsCount()
+    {
+        var validator = new DebitValidator();
+        var request = RequestDebitJsonBuilder.Build();
+        request.DebitType = DebitType.OneTime;
+        request.RecurrenceMonthsCount = null;
+
+        var validationResult = validator.Validate(request);
+
+        validationResult.IsValid.ShouldBeTrue();
+    }
+
+    [Fact]
     public void Error_Empty_Title()
     {
         var validator = new DebitValidator();
@@ -58,7 +71,7 @@ public class DebitValidatorTest
     }
 
     [Fact]
-    public void Error_Invalid_Income_Type()
+    public void Error_Invalid_Debit_Type()
     {
         var validator = new DebitValidator();
         var request = RequestDebitJsonBuilder.Build();
@@ -95,5 +108,19 @@ public class DebitValidatorTest
 
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.USE_BUSINESS_DAY_NULL));
+    }
+
+    [Fact]
+    public void Error_Invalid_RecurrenceMonthsCount()
+    {
+        var validator = new DebitValidator();
+        var request = RequestDebitJsonBuilder.Build();
+        request.DebitType = DebitType.Recurring;
+        request.RecurrenceMonthsCount = null;
+
+        var validationResult = validator.Validate(request);
+
+        validationResult.IsValid.ShouldBeFalse();
+        //validationResult.Errors.ShouldContain(e => e.ErrorMessage.Equals(ExceptionMessages.USE_BUSINESS_DAY_NULL));
     }
 }
