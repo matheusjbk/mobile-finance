@@ -23,4 +23,28 @@ public class BusinessDayService : IBusinessDayService
             nextDate = nextDate.AddDays(1);
         }
     }
+
+    public async Task<DateTime> GetNthBusinessDay(int year, int month, int day)
+    {
+        if(day <= 0)
+            throw new Exception();
+
+        var monthStart = new DateTime(year, month, 1);
+        var monthEnd = monthStart.AddMonths(1).AddDays(-1);
+
+        var businessDates = await _dbContext.CalendarDays
+            .AsNoTracking()
+            .Where(d => d.Date >= monthStart && d.Date <= monthEnd && d.IsBusinessDay)
+            .OrderBy(d => d.Date)
+            .Select(d => d.Date)
+            .ToListAsync();
+
+        if(businessDates.Count.Equals(0))
+            throw new Exception();
+
+        if(day <= businessDates.Count)
+            return businessDates[day - 1];
+
+        return businessDates.Last();
+    }
 }

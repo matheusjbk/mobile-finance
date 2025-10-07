@@ -38,7 +38,7 @@ public class GetCalendarDayUseCase : IGetCalendarDayUseCase
         var incomeOccurrences = new List<(DateTime, Domain.Entities.Income)>();
         foreach(var income in incomes)
         {
-            var occurrences = _recurrenceService.GetOcurrences(income, date, endDate);
+            var occurrences = await _recurrenceService.GetOcurrences(income, date, endDate);
 
             foreach(var occurrence in occurrences)
             {

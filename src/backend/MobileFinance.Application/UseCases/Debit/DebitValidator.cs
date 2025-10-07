@@ -14,6 +14,9 @@ public class DebitValidator : AbstractValidator<RequestDebitJson>
         RuleFor(debit => debit.DebitType).IsInEnum().WithMessage(ExceptionMessages.DEBIT_TYPE_NOT_SUPPORTED);
         RuleFor(debit => debit.PaidOn).NotEmpty().WithMessage(ExceptionMessages.EMPTY_PAID_DATE);
         When(debit => debit.DebitType.Equals(DebitType.Recurring), () =>
-            RuleFor(debit => debit.UseBusinessDay).NotNull().WithMessage(ExceptionMessages.USE_BUSINESS_DAY_NULL));
+        {
+            RuleFor(debit => debit.UseBusinessDay).NotNull().WithMessage(ExceptionMessages.USE_BUSINESS_DAY_NULL);
+            RuleFor(debit => debit.RecurrenceMonthsCount).NotEmpty();
+        });
     }
 }

@@ -9,5 +9,6 @@ public class ResponseIncomeJson
     public IncomeType IncomeType { get; set; }
     public int? RecurrenceMonthsCount { get; set; }
     public DateTime ReceivedOn { get; set; }
+    public int? BusinessDayNumber { get; set; }
     public bool UseBusinessDay { get; set; }
 }

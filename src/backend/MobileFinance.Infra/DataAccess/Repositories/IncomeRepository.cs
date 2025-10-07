@@ -20,15 +20,24 @@ public class IncomeRepository : IIncomeWriteOnlyRepository, IIncomeReadOnlyRepos
 
     async Task<Income?> IIncomeReadOnlyRepository.GetById(User user, long incomeId) => await GetFullIncome(user, incomeId, trackQuery: false);
 
-    public async Task<IEnumerable<Income>> GetByPeriod(User user, DateTime start, DateTime end) => 
-        await _dbContext.Incomes.AsNoTracking()
-            .Where(income => income.Active && income.UserId.Equals(user.Id) && 
+    public async Task<IEnumerable<Income>> GetByPeriod(User user, DateTime start, DateTime end)
+    {
+        var normalIncomes = await _dbContext.Incomes.AsNoTracking()
+            .Where(income => income.Active && income.UserId.Equals(user.Id) && income.IncomeType != IncomeType.Salary && income.ReceivedOn.HasValue &&
                 (
-                    (income.IncomeType.Equals(IncomeType.OneTime) && income.ReceivedOn.Date >= start.Date && income.ReceivedOn.Date <= end.Date) ||
-            
-                    ((income.IncomeType.Equals(IncomeType.Rent) || income.IncomeType.Equals(IncomeType.Salary)) && income.ReceivedOn.Date <= end.Date)
+                    (income.IncomeType.Equals(IncomeType.OneTime) && income.ReceivedOn.Value.Date >= start.Date && income.ReceivedOn.Value.Date <= end.Date) ||
+
+                    (income.IncomeType.Equals(IncomeType.Rent) && income.ReceivedOn.Value.Date <= end.Date)
                 ))
             .ToListAsync();
+
+        var salaryIncomes = await _dbContext.Incomes.AsNoTracking()
+            .Where(income => income.Active && income.UserId.Equals(user.Id) && income.IncomeType.Equals(IncomeType.Salary))
+            .ToListAsync();
+
+        return normalIncomes.Concat(salaryIncomes);
+    }
+        
 
     async Task<Income?> IIncomeUpdateOnlyRepository.GetById(User user, long incomeId) => await GetFullIncome(user, incomeId, trackQuery: true);
 

@@ -40,7 +40,7 @@ public class GetCalendarMonthUseCase : IGetCalendarMonthUseCase
         var incomeOccurrences = new List<(DateTime, Domain.Entities.Income)>();
         foreach(var income in incomes)
         {
-            var occurrences = _recurrenceService.GetOcurrences(income, start, end);
+            var occurrences = await _recurrenceService.GetOcurrences(income, start, end);
 
             foreach(var occurrence in occurrences)
             {

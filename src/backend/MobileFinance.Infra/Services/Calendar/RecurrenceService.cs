@@ -5,31 +5,55 @@ using MobileFinance.Domain.Services.Calendar;
 namespace MobileFinance.Infra.Services.Calendar;
 public class RecurrenceService : IRecurrenceService
 {
-    public IEnumerable<(DateTime date, Income income)> GetOcurrences(Income income, DateTime start, DateTime end)
+    private readonly IBusinessDayService _businessDayService;
+
+    public RecurrenceService(IBusinessDayService businessDayService) => _businessDayService = businessDayService;
+
+    public async Task<IEnumerable<(DateTime date, Income income)>> GetOcurrences(Income income, DateTime start, DateTime end)
     {
         var occurrences = new List<(DateTime, Income)>();
 
         if(income.IncomeType == IncomeType.OneTime)
         {
-             if (income.ReceivedOn >= start && income.ReceivedOn <= end)
-                occurrences.Add((income.ReceivedOn, income));
+             if (income.ReceivedOn.HasValue && income.ReceivedOn.Value >= start && income.ReceivedOn.Value <= end)
+                occurrences.Add((income.ReceivedOn.Value, income));
 
             return occurrences;
         }
 
-        var currentDate = income.ReceivedOn;
-        var count = 0;
-
-        while(currentDate <= end)
+        if(income.IncomeType == IncomeType.Rent)
         {
-            if(income.RecurrenceMonthsCount.HasValue && count >= income.RecurrenceMonthsCount.Value)
-                break;
+            if(!income.ReceivedOn.HasValue) return occurrences;
 
-            if(currentDate >= start)
-                occurrences.Add((currentDate, income));
+            var currentDate = income.ReceivedOn!.Value;
 
-            currentDate = currentDate.AddMonths(1);
-            count++;
+            while(currentDate <= end)
+            {
+                if(currentDate >= start) occurrences.Add((currentDate, income));
+                currentDate = currentDate.AddMonths(1);
+            }
+
+            return occurrences;
+        }
+
+        if(income.IncomeType == IncomeType.Salary)
+        {
+            if(!income.BusinessDayNumber.HasValue) return occurrences;
+
+            var cursor = new DateTime(start.Year, start.Month, 1);
+            var endMonth = new DateTime(end.Year, end.Month, 1);
+
+            while(cursor <= endMonth)
+            {
+                var salaryDate = await _businessDayService.GetNthBusinessDay(cursor.Year, cursor.Month, income.BusinessDayNumber.Value);
+
+                if(salaryDate >= start && salaryDate <= end)
+                    occurrences.Add((salaryDate, income));
+
+                cursor = cursor.AddMonths(1);
+            }
+
+            return occurrences;
         }
 
         return occurrences;
