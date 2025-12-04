@@ -1,0 +1,52 @@
+volumes:
+  mysql_data:
+
+networks:
+  mobilefinance-network:
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Root123!
+      MYSQL_DATABASE: mobilefinancedb
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mobilefinance-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - 3306:3306
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    restart: always
+    networks:
+      - mobilefinance-network
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+  api:
+    build:
+      context: .
+      dockerfile: src/backend/MobileFinance.API/Dockerfile
+    ports:
+      - 5000:8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+    environment:
+      ConnectionStrings__Connection_MySql: server=mysql;port=3306;database=mobilefinancedb;uid=root;pwd=Root123!;
+      Settings__RabbitMQ__HostName: rabbitmq
+      Settings__RabbitMQ__QueueName: user
+    networks:
+      - mobilefinance-network
