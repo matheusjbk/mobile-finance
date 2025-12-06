@@ -10,6 +10,13 @@ using System.Security.Claims;
 namespace MobileFinance.API.Controllers;
 public class LoginController : MobileFinanceBaseController
 {
+    /// <summary>
+    /// Realiza login de um usuário.
+    /// </summary>
+    /// <remarks>Endpoint para autenticação de um usuário</remarks>
+    /// <param name="request">Objeto com 2 propriedades: E-mail e Senha.</param>
+    /// <response status="200">Retorna um objeto contendo um JWT para realizar login.</response>
+    /// <response status="401">Retorna um objeto detalhando o erro.</response>
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
@@ -22,6 +29,15 @@ public class LoginController : MobileFinanceBaseController
         return Ok(response);
     }
 
+    /// <summary>
+    /// Realiza login de um usuário com provedor externo (Google).
+    /// </summary>
+    /// <remarks>
+    /// Endpoint para autenticação de um usuário utilizando sua conta do Google.
+    /// Este endpoint só pode ser acessado via frontend, pois redireciona o usuário para a página de login do Google.
+    /// </remarks>
+    /// <param name="returnUrl">Endereço para onde o usuário será redirecionado após realizar login.</param>
+    /// <response status="200">Redireciona o usuário para o endereço especificado no parâmetro.</response>
     [HttpGet]
     [Route("google")]
     public async Task<IActionResult> LoginGoogle(
