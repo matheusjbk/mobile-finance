@@ -10,6 +10,7 @@ using MobileFinance.Domain.Security.Tokens;
 using MobileFinance.Infra;
 using MobileFinance.Infra.Extensions;
 using MobileFinance.Infra.Migrations;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ builder.Services.AddControllers(options => options.Filters.Add(typeof(ExceptionF
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
+
     options.OperationFilter<IdFilter>();
 
     const string BEARER = "Bearer";
