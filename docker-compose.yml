@@ -45,6 +45,7 @@ services:
       rabbitmq:
         condition: service_started
     environment:
+      ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__Connection_MySql: server=mysql;port=3306;database=mobilefinancedb;uid=root;pwd=Root123!;
       Settings__RabbitMQ__HostName: rabbitmq
       Settings__RabbitMQ__QueueName: user
